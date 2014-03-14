@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mapping-table>
+  <!-- Mappings for DublinCore metadata. (only tests) -->
+  <namespaces>
+    <namespace ns="dc" uri="http://purl.org/dc/elements/1.1/"/>
+  </namespaces>
+  <mappings>
+    <field name="fulltext">
+      <xpath>normalize-space(string(/))</xpath>
+    </field>
+    <field name="OAI-PMH identifier">
+      <xpath>//record/header/identifier/text()</xpath>
+    </field>
+    <field name="MapperVersion">
+      <string>${mapper_version}</string>
+    </field>
+    <field name="author">
+      <xpath>string-join(distinct-values(//dc:creator/text()), ';')</xpath>
+    </field>
+    <field name="title">
+      <xpath>//dc:title/text()</xpath>
+    </field>
+    <field name="notes">
+      <xpath>//dc:description/text()</xpath>
+    </field>
+    <field name="tags">
+      <xpath>if (contains(//dc:type/text(), ';')) then substring-before(//dc:type/text(), ';') else //dc:type/text()</xpath>
+    </field>
+    <field name="Discipline">
+      <xpath>//dc:subject/text()</xpath>
+    </field>
+    <field name="Language">
+      <xpath>//dc:language/text()</xpath>
+    </field>
+    <field name="format">
+      <xpath>//dc:format/text()</xpath>
+    </field>
+    <field name="GeograhicDescription">
+      <xpath>//dc:coverage/text()</xpath>
+    </field>
+    <field name="Origin">
+      <xpath>//dc:publisher/text()</xpath>
+    </field>
+    <field name="url">
+      <xpath>if (contains(//dc:identifier/text(),'doi:')) then concat('http://dx.doi.org/',//dc:identifier/text()) else //dc:identifier/text()</xpath>
+      <xpath>if (contains(//dc:source/text(),'doi:')) then  concat('http://dx.doi.org/',//dc:source/text()) else //dc:source/text()</xpath>
+    </field>
+    <field name="PublicationYear">
+      <xpath>if (contains(//dc:date/text(), '-')) then substring-before(//dc:date/text(), '-') else //dc:date/text()</xpath>
+    </field>
+  </mappings>
+</mapping-table>

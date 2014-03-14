@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mapping-table>
+  <!-- Mappings for ODS metadata from AgInfra. -->
+  <namespaces>
+    <namespace ns="lom" uri="http://ltsc.ieee.org/xsd/LOM"/> 
+    <namespace ns="o" uri="http://www.openarchives.org/OAI/2.0/"/>
+  </namespaces>
+  <mappings>
+    <!-- General fields shown above the field/value tables -->
+    <field name="title">
+      <xpath>//o:general/o:title/o:string/text()</xpath>
+    </field>
+    <field name="notes">
+      <xpath>//o:general/o:description/o:string/text()</xpath>
+    </field>
+    <field name="tags">
+      <xpath>//o:general/o:keyword/o:string/text()</xpath>
+    </field>
+    <!-- Central facets, shown in an extra table 'Main fields' (not implemented yet : all fields in table 'Additional info') -->
+    <field name="url">
+      <xpath>//o:general/o:identifier/o:entry/text()</xpath>
+    </field>
+    <field name="Discipline">
+      <xpath>//dc:subject/text()</xpath>
+    </field>
+    <field name="author">
+      <xpath>string-join(distinct-values(//dc:creator/text()), '; ')</xpath>
+    </field>
+    <!-- All other visible fields, shown in table 'Additional info' -->
+    <field name="PublicationYear">
+      <xpath>if (contains(//o:lifecycle/o:date/o:/dateTime/text(), '-')) then substring-before(//o:lifecycle/o:date/o:/dateTime/text(), '-') else //o:lifecycle/o:date/o:/dateTime/text()</xpath>
+    </field>
+    <field name="PublicationTimestamp">
+      <xpath>if (contains(//o:lifecycle/o:date/o:/dateTime/text(), '-')) then concat(substring-before(//o:lifecycle/o:date/o:/dateTime/text(), '-'),'-07-01T11:59:59Z')  else concat(//o:lifecycle/o:date/o:/dateTime/text(),'-07-01T11:59:59Z') </xpath>
+    </field>
+    <field name="Language">
+      <xpath>//o:general/o:language/text()</xpath>
+    </field>
+    <field name="Origin">
+      <xpath>//o:lifecycle/o:contribute/o:entity/text()</xpath>
+    </field>
+    <field name="Format">
+      <xpath>//dc:format[not(contains(text(), 'Bytes'))]</xpath>
+    </field>
+    <field name="GeograhicDescription">
+      <xpath>//dc:coverage/text()</xpath>
+    </field>
+    <field name="Rights">
+      <xpath>//dc:rights/text()</xpath>
+    </field>
+    <!-- Hidden fields, only shown to logged in CKAN users -->
+    <field name="fulltext">
+      <xpath>normalize-space(string(/))</xpath>
+    </field>
+    <field name="OAI-PMH identifier">
+      <xpath>//record/header/identifier/text()</xpath>
+    </field>
+    <field name="MapperVersion">
+      <string>${mapper_version}</string>
+    </field>
+  </mappings>
+</mapping-table>

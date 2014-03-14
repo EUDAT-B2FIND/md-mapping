@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mapping-table>
+  <!-- Mappings for eml metadata from GBIF. -->
+  <namespaces>
+    <namespace ns="eml" uri="eml://ecoinformatics.org/eml-2.1.1"/>
+    <namespace ns="o" uri="http://www.openarchives.org/OAI/2.0/"/>
+  </namespaces>
+  <mappings>
+   <!-- General fields shown above the field/value tables -->
+    <field name="title">
+      <xpath>//o:dataset/o:title/text()</xpath>
+    </field>
+    <field name="notes">
+      <xpath>//o:dataset/o:abstract/o:para/text()</xpath>
+    </field>
+    <field name="tags">
+      <xpath>//o:dataset/o:coverage/o:taxonomicCoverage/o:taxonomicClassification/o:taxonRankValue/text()</xpath>
+    </field>
+    <!-- Central facets, shown in an extra table 'Main fields' (not implemented yet : all fields in table 'Additional info') -->
+    <field name="url">
+      <xpath>if (contains(//o:dataset/o:abstract/o:para/text(), 'doi:')) then concat('http://dx.doi.org/', replace(//o:dataset/o:abstract/o:para/text(), '.*doi:([^\s]+).*', '$1')) else ''</xpath>
+      <xpath>//o:dataset/o:distribution/o:online/o:url/text()</xpath>
+      <xpath>//o:dataset/o:abstract/o:para/text()</xpath>
+    </field>
+    <field name="Discipline">
+      <xpath>//o:dataset/o:coverage/o:taxonomicCoverage/o:taxonomicClassification/o:taxonRankName/text()</xpath>
+    </field>
+    <field name="author">
+      <xpath>//o:dataset/o:contact/o:individualName/o:surName/text()</xpath>
+      <xpath>if (contains(//o:dataset/o:abstract/o:para/text(), ':')) then substring-before(//o:dataset/o:abstract/o:para/text(), ':') else //o:dataset/o:abstract/o:para/text()</xpath> 
+    </field>
+    <!-- All other visible fields, shown in table 'Additional info' -->
+    <field name="PublicationYear">
+      <xpath>if (contains(//o:dataset/o:pubDate/text(), '-')) then substring-before(//o:dataset/o:pubDate/text(), '-') else //o:dataset/o:pubDate/text()</xpath>
+    </field>
+    <field name="PublicationTimestamp">
+      <xpath>if (contains(//o:dataset/o:pubDate/text(), '-')) then concat(substring-before(//o:dataset/o:pubDate/text(), '-'),'-07-01T11:59:59Z') else concat(//o:dataset/o:pubDate/text(),'-07-01T11:59:59Z') </xpath>
+    </field>
+    <field name="Origin">
+      <xpath>//o:dataset/o:metadataProvider/o:organizationName/text()</xpath>
+    </field>
+<!-- Not available
+    <field name="Format">
+      <xpath> ...  </xpath>
+    </field>
+-->
+    <field name="GeographicCoverage">
+      <xpath>replace(//o:dataset/o:coverage/o:geographicCoverage/o:geographicDescription/text(),"\s+","")</xpath>
+    </field>
+    <field name="TemporalCoverage:BeginDate">
+      <xpath>concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:beginDate/o:calendarDate/text(),'T00:00:00Z')</xpath>
+    </field>
+    <field name="TemporalCoverage:EndDate">
+      <xpath>concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:endDate/o:calendarDate/text(),'T23:59:59Z')</xpath>
+    </field>
+    <!-- Hidden fields, only shown to logged in CKAN users -->
+    <field name="fulltext">
+      <xpath>normalize-space(string(/))</xpath>
+    </field>
+<!-- Header is here not available
+    <field name="OAI-PMH identifier">
+      <xpath>//record/header/identifier/text()</xpath>
+    </field>
+-->
+<!-- Deprecated - not longer needed
+    <field name="File identifier">
+      <xpath>//gmd:MD_Metadata/gmd:fileIdentifier/gco:CharacterString/text()</xpath>
+    </field>
+-->
+    <field name="MapperVersion">
+      <string>${mapper_version}</string>
+    </field>
+    <field name="spatial">
+      <xpath>concat(//o:dataset/o:coverage/o:geographicCoverage/o:boundingCoordinates/o:westBoundingCoordinate/text(), ',', //o:dataset/o:coverage/o:geographicCoverage/o:boundingCoordinates/o:southBoundingCoordinate/text() , ',', //o:dataset/o:coverage/o:geographicCoverage/o:boundingCoordinates/o:eastBoundingCoordinate/text(), ',', //o:dataset/o:coverage/o:geographicCoverage/o:boundingCoordinates/o:northBoundingCoordinate/text())</xpath>
+    </field>    
+  </mappings>
+</mapping-table>
