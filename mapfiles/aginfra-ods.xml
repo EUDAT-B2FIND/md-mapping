@@ -56,7 +56,7 @@
       <xpath>//record/header/identifier/text()</xpath>
     </field>
     <field name="MapperVersion">
-      <string>${mapper_version}</string>
+      <string expand="true">${mapper_version}</string>
     </field>
   </mappings>
 </mapping-table>
