@@ -23,7 +23,6 @@
       <xpath>//cmd:CMD/cmd:Components/cmd:Song/cmd:Incipit/cmd:Original/text()</xpath>
     </field>
     <field name="tags">
-      <xpath>substring(replace(//cmd:CMD/cmd:Components/cmd:Session/cmd:MDGroup/cmd:Location/cmd:Country/text(),"[:()]","-"),0,50)</xpath>
       <xpath>substring(replace(//cmd:CMD/cmd:Header/cmd:MdCollectionDisplayName/text(),"[:()]","-"),0,50)</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:Song/cmd:Keywords/cmd:Keyword/text()</xpath>
     </field>
