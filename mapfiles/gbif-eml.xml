@@ -68,7 +68,7 @@
     </field>
 -->
     <field name="MapperVersion">
-      <string>${mapper_version}</string>
+      <string expand="true">${mapper_version}</string>
     </field>
     <field name="spatial">
       <xpath>concat(//o:dataset/o:coverage/o:geographicCoverage/o:boundingCoordinates/o:westBoundingCoordinate/text(), ',', //o:dataset/o:coverage/o:geographicCoverage/o:boundingCoordinates/o:southBoundingCoordinate/text() , ',', //o:dataset/o:coverage/o:geographicCoverage/o:boundingCoordinates/o:eastBoundingCoordinate/text(), ',', //o:dataset/o:coverage/o:geographicCoverage/o:boundingCoordinates/o:northBoundingCoordinate/text())</xpath>
