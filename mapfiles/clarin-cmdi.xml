@@ -15,6 +15,8 @@
       <xpath>//cmd:CMD/cmd:Components/cmd:Song/cmd:Songtitle/cmd:Normalized/text()</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:Song/cmd:Source/cmd:Title/cmd:Normalised/text()</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:SongScan/cmd:GeneralInfo/cmd:Title/text()</xpath>
+      <xpath>//cmd:CMD/cmd:Components/cmd:DiscAn_Case/cmd:ProjectName/text()</xpath>
+      <xpath>//cmd:CMD/cmd:Components/cmd:DiscAn_Case/cmd:DiscAn_AnnotatedFeatures/cmd:SubcorpusName/text()</xpath>
     </field>
     <field name="notes">
       <xpath>//cmd:CMD/cmd:Components/cmd:Session/cmd:descriptions/cmd:Description[@LanguageId = 'ISO639:eng' or @LanguageId = 'ISO639-2:eng' or @LanguageId = '']/text()</xpath>
@@ -60,6 +62,7 @@
     <field name="Language">
       <xpath>//cmd:CMD/cmd:Components/cmd:Session/cmd:MDGroup/cmd:Content/cmd:Content_Languages/cmd:Content_Language/cmd:Name/text()</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:Song/cmd:Language/cmd:LanguageName/text()</xpath>
+      <xpath>//cmd:CMD/cmd:Components/cmd:DiscAn_Case/cmd:Language/cmd:LanguageName/text()</xpath>
     </field>
     <field name="Origin">
       <xpath>//cmd:CMD/cmd:Header/cmd:MdCollectionDisplayName/text()</xpath>
@@ -78,9 +81,9 @@
       <xpath>//record/header/identifier/text()</xpath>
     </field>
     <field name="MapperVersion">
-      <string expand="true">${mapper_version}</string>
+      <string>${mapper_version}</string>
     </field>
-<!--
+<!-- Deprecated fields :
     <field name="Relation">
       <xpath>//cmd:CMD/cmd:Components/cmd:Session/cmd:Resources/cmd:WrittenResource/cmd:ResourceLink/text()</xpath>
     </field>

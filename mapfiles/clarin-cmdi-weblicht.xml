@@ -12,7 +12,7 @@
       <xpath>//record/header/identifier/text()</xpath>
     </field>
     <field name="MapperVersion">
-	    <string expand="true">${mapper_version}</string>
+	    <string>${mapper_version}</string>
     </field>
     <field name="author">
       <xpath>//cmd:CMD/cmd:Components/cmd:WebLichtWebService/cmd:Service/cmd:Contact/cmd:Email/text()</xpath>      

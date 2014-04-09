@@ -23,7 +23,7 @@
     </field>
     <!-- Central facets, shown in an extra table 'Main fields' (not implemented yet : all fields in table 'Additional info') -->
     <field name="url">
-      <xpath>//dct:hasFormat/fp:File[@rdf:about]/text()" >
+      <xpath>//dct:hasFormat/fp:File[@rdf:about]/text()</xpath> 
     </field>
     <field name="Discipline">
       <xpath>//dc:subject/text()</xpath>
@@ -67,7 +67,7 @@
       <xpath>//record/header/identifier/text()</xpath>
     </field>
     <field name="MapperVersion">
-      <string expand="true">${mapper_version}</string>
+      <string>${mapper_version}</string>
     </field>
   </mappings>
 </mapping-table>

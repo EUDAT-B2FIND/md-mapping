@@ -13,7 +13,7 @@
       <xpath>string-join(distinct-values(//dc:description/text()), ' | ')</xpath>
     </field>
     <field name="tags">
-      <xpath>//dc:type/text()</xpath>
+      <xpath>replace(replace(//dc:type/text(),"info:",""),"/"," ")</xpath>
     </field>
     <!-- Central facets, shown in an extra table 'Main fields' (not implemented yet : all fields in table 'Additional info') -->
     <field name="url">
@@ -33,7 +33,7 @@
       <xpath>if (contains(//dc:date[1]/text(), '-')) then substring-before(//dc:date[1]/text(), '-') else //dc:date[1]/text()</xpath>
     </field>
     <field name="PublicationTimestamp">
-      <xpath>if (contains(//dc:date[1]/text(), '-')) then concat(substring-before(//dc:date[1]/text(), '-'),'-07-01T11:59:59Z') else concat(//dc:date[1]/text(),'-07-01T11:59:59Z') </xpath>
+      <xpath>if (matches(//dc:date[1]/text(), '[12]\d{3}.*')) then if(contains(//dc:date[1]/text(), '-')) then concat(substring-before(//dc:date[1]/text(), '-'),'-07-01T11:59:59Z') else concat(//dc:date[1]/text(),'-07-01T11:59:59Z') else '' </xpath>
     </field>
     <field name="Language">
       <xpath>//dc:language/text()</xpath>
@@ -58,7 +58,7 @@
       <xpath>//record/header/identifier/text()</xpath>
     </field>
     <field name="MapperVersion">
-      <string expand="true">${mapper_version}</string>
+      <string>${mapper_version}</string>
     </field>
   </mappings>
 </mapping-table>

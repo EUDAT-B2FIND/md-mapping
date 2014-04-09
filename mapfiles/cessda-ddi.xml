@@ -4,16 +4,68 @@
   <!-- Mappings for DDI 1.2.2. -->
   <namespaces>
     <!-- This version doesn't define any namespaces! -->
+    <namespace ns="o" uri="http://www.openarchives.org/OAI/2.0/"/>
   </namespaces>
   <mappings>
    <!-- General fields shown above the field/value tables -->
     <field name="title">
-      <xpath>//codeBook/docDscr/citation/titlStmt/titl/text()</xpath>
+      <xpath>//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:titlStmt/o:titl/text()</xpath>
     </field>
     <field name="notes">
-      <xpath>//codeBook/stdyDscr/stdyInfo/abstract/text()</xpath>
+      <xpath>//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:verStmt/o:notes/text()</xpath>
+<!--
+      <xpath>//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:titlStmt/o:serName/o:serStmt/o:citationi/o:dataAccs/o:useStmt/o:citReq/text()</xpath>
+      <xpath>//o:record/o:metadata/o:codeBook/o:stdyDscr/o:stdyInfo/o:abstract/text()</xpath>
+-->
     </field>
-    <!-- Central facets, shown in an extra table 'Main fields' (not implemented yet : all fields in table 'Additional info') -->
+    <field name="tags">
+       <xpath>//o:dataset/o:coverage/o:taxonomicCoverage/o:taxonomicClassification/o:taxonRankValue[not(text()='Unknown')]/text()</xpath>
+    </field>
+    <!-- Central facets, shown in table 'Additional info' -->
+    <field name="url">
+          <xpath>//o:record/o:metadata/o:codeBook/o:stdyDscr/o:dataAccs/o:setAvail/o:accsPlac/text()</xpath>
+<!--
+          <xpath>//o:record/o:metadata/o:codeBook/o:stdyDscr/o:dataAccs/o:setAvail/o:accsPlac[@URI]/text()</xpath>
+          <xpath>if (contains(//o:dataset/o:abstract/o:para/text(), 'doi:')) then concat('http://dx.doi.org/', replace(//o:dataset/o:abstract/o:para/text(), '.*doi:([^\s]+).*', '$1')) else ''</xpath>
+-->
+    </field>
+    <field name="Discipline">
+           <xpath>//o:dataset/o:coverage/o:taxonomicCoverage/o:taxonomicClassification/o:taxonRankName/text()</xpath>
+    </field>
+    <field name="author">
+       <xpath>//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:distStmt/o:contact/text()</xpath>
+       <xpath>//o:dataset/o:contact/o:individualName/o:surName[not(text()='null null')]/text()</xpath>
+       <xpath>if (contains(//o:dataset/o:abstract/o:para/text(), ':')) then substring-before(//o:dataset/o:abstract/o:para[not(text()='null null')]/text(), ':') else //o:dataset/o:abstract/o:para[not(text()='null null')]/text()</xpath>
+    </field>
+    <!-- All other visible fields, shown in table 'Additional info' -->
+    <field name="PublicationYear">
+        <xpath>if (contains(//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:prodDate/text(), '-')) then substring-before(//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:prodDate/text(), '-') else //o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:prodDate/text()</xpath>
+<!--
+     <xpath>if (contains(//o:dataset/o:pubDate/text(), '-')) then substring-before(//o:dataset/o:pubDate/text(), '-') else //o:dataset/o:pubDate/text()</xpath>
+-->
+    </field>
+    <field name="PublicationTimestamp">
+        <xpath>if (contains(//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:prodDate/text(), '-')) then concat(substring-before(//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:prodDate/text(), '-'),'-07-01T11:59:59Z') else concat(//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:prodDate/text(),'-07-01T11:59:59Z') </xpath>
+    </field>
+    <field name="Origin">
+          <xpath>//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:titlStmt/o:prodDate/o:software/text()</xpath>
+    </field>
+    <field name="GeographicCoverage">
+          <xpath>replace(//o:dataset/o:coverage/o:geographicCoverage/o:geographicDescription/text(),"\s+","")</xpath>
+    </field>
+    <field name="TemporalCoverage:BeginDate">
+          <xpath>concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:beginDate/o:calendarDate/text(),'T00:00:00Z')</xpath>
+    </field>
+    <field name="TemporalCoverage:EndDate">
+           <xpath>concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:endDate/o:calendarDate/text(),'T23:59:59Z')</xpath>
+    </field>
+    <!-- Hidden fields, only shown to logged in CKAN users -->
+    <field name="fulltext">
+          <xpath>normalize-space(string(/))</xpath>
+    </field>
+    <field name="MapperVersion">
+          <string>0.1.3266</string>
+    </field>
 
     <!-- All other visible fields, shown in table 'Additional info' -->
     <field name="PublicationTimestamp">
@@ -21,8 +73,15 @@
       <xpath>//codeBook/docDscr/citation/prodStmt/prodDate/@date</xpath>
       <xpath>//codeBook/docDscr/citation/prodStmt/prodDate/text()</xpath>
     </field>
+    <field name="Origin">
+      <xpath>//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:software/text()</xpath>
+      <xpath>//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:prodPlace/text()</xpath>
+    </field>
     <field name="Format">
       <xpath>//codeBook/fileDscr//fileType//text()</xpath>
+    </field>
+    <field name="Rights">
+      <xpath>//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:copyright/text()</xpath>
     </field>
     <!-- Hidden fields, only shown to logged in CKAN users -->
     <field name="fulltext">
@@ -32,7 +91,7 @@
       <xpath>//record/header/identifier/text()</xpath>
     </field>
     <field name="MapperVersion">
-      <string expand="true">${mapper_version}</string>
+	<string>${mapper_version}</string>
     </field>
   </mappings>
 </mapping-table>

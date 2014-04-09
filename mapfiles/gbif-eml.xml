@@ -14,7 +14,7 @@
       <xpath>//o:dataset/o:abstract/o:para/text()</xpath>
     </field>
     <field name="tags">
-      <xpath>//o:dataset/o:coverage/o:taxonomicCoverage/o:taxonomicClassification/o:taxonRankValue/text()</xpath>
+      <xpath>//o:dataset/o:coverage/o:taxonomicCoverage/o:taxonomicClassification/o:taxonRankValue[not(text()='Unknown')]/text()</xpath>
     </field>
     <!-- Central facets, shown in an extra table 'Main fields' (not implemented yet : all fields in table 'Additional info') -->
     <field name="url">
@@ -26,8 +26,8 @@
       <xpath>//o:dataset/o:coverage/o:taxonomicCoverage/o:taxonomicClassification/o:taxonRankName/text()</xpath>
     </field>
     <field name="author">
-      <xpath>//o:dataset/o:contact/o:individualName/o:surName/text()</xpath>
-      <xpath>if (contains(//o:dataset/o:abstract/o:para/text(), ':')) then substring-before(//o:dataset/o:abstract/o:para/text(), ':') else //o:dataset/o:abstract/o:para/text()</xpath> 
+      <xpath>//o:dataset/o:contact/o:individualName/o:surName[not(text()='null null')]/text()</xpath>
+      <xpath>if (contains(//o:dataset/o:abstract/o:para/text(), ':')) then substring-before(//o:dataset/o:abstract/o:para[not(text()='null null')]/text(), ':') else //o:dataset/o:abstract/o:para[not(text()='null null')]/text()</xpath> 
     </field>
     <!-- All other visible fields, shown in table 'Additional info' -->
     <field name="PublicationYear">
@@ -68,7 +68,7 @@
     </field>
 -->
     <field name="MapperVersion">
-      <string expand="true">${mapper_version}</string>
+      <string>${mapper_version}</string>
     </field>
     <field name="spatial">
       <xpath>concat(//o:dataset/o:coverage/o:geographicCoverage/o:boundingCoordinates/o:westBoundingCoordinate/text(), ',', //o:dataset/o:coverage/o:geographicCoverage/o:boundingCoordinates/o:southBoundingCoordinate/text() , ',', //o:dataset/o:coverage/o:geographicCoverage/o:boundingCoordinates/o:eastBoundingCoordinate/text(), ',', //o:dataset/o:coverage/o:geographicCoverage/o:boundingCoordinates/o:northBoundingCoordinate/text())</xpath>
