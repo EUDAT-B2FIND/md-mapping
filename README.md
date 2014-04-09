@@ -16,12 +16,12 @@ To follow these steps, you need the following: Perl, Maven, JDK 7, git
 
 1. Choose an empty directory, which will become the working directory,
 and enter it.
-2. ````git clone http://github.com/TheLanguageArchive/md-mapper.git````
-3. ````git clone http://github.com/B2FIND/md-mapping````
-4. ````cd md-mapper````
-5. ````./update-deploy.sh -f````
+2. ```git clone http://github.com/TheLanguageArchive/md-mapper.git```
+3. ```git clone http://github.com/B2FIND/md-mapping```
+4. ```cd md-mapper```
+5. ```./update-deploy.pl -f```
 
-On subsequent invocations of update-deploy.sh don't use the -f flag.
+On subsequent invocations of update-deploy.pl don't use the -f flag.
 
 The above is the simplest possible set-up. Different directory
 structures are possible; see the update-deploy script for available
