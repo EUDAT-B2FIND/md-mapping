@@ -55,7 +55,7 @@
     <field name="fulltext">
       <xpath>normalize-space(string(/))</xpath>
     </field>
-    <field name="OAI-PMH identifier">
+    <field name="oai_identifier">
       <xpath>//r:header/r:identifier/text()</xpath>
     </field>
     <field name="MapperVersion">
