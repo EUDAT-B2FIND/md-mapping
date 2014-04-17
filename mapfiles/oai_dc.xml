@@ -2,6 +2,7 @@
 <mapping-table>
   <!-- Mappings for DublinCore metadata from DataCite. -->
   <namespaces>
+    <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
     <namespace ns="dc" uri="http://purl.org/dc/elements/1.1/"/>
   </namespaces>
   <mappings>
@@ -13,7 +14,7 @@
       <xpath>string-join(distinct-values(//dc:description/text()), ' | ')</xpath>
     </field>
     <field name="tags">
-      <xpath>replace(replace(//dc:type/text(),"info:",""),"/"," ")</xpath>
+      <xpath>replace(replace(//dc:type/text(),"info:",""),"[()/]"," ")</xpath>
     </field>
     <!-- Central facets, shown in an extra table 'Main fields' (not implemented yet : all fields in table 'Additional info') -->
     <field name="url">
@@ -55,7 +56,7 @@
       <xpath>normalize-space(string(/))</xpath>
     </field>
     <field name="OAI-PMH identifier">
-      <xpath>//record/header/identifier/text()</xpath>
+      <xpath>//r:header/r:identifier/text()</xpath>
     </field>
     <field name="MapperVersion">
       <string expand="true">${mapper_version}</string>
