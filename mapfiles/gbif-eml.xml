@@ -2,6 +2,7 @@
 <mapping-table>
   <!-- Mappings for eml metadata from GBIF. -->
   <namespaces>
+    <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
     <namespace ns="eml" uri="eml://ecoinformatics.org/eml-2.1.1"/>
     <namespace ns="o" uri="http://www.openarchives.org/OAI/2.0/"/>
   </namespaces>
@@ -57,11 +58,9 @@
     <field name="fulltext">
       <xpath>normalize-space(string(/))</xpath>
     </field>
-<!-- Header is here not available
-    <field name="OAI-PMH identifier">
-      <xpath>//record/header/identifier/text()</xpath>
+    <field name="oai_identifier">
+      <xpath>//r:record/r:header/r:identifier/text()</xpath>
     </field>
--->
 <!-- Deprecated - not longer needed
     <field name="File identifier">
       <xpath>//gmd:MD_Metadata/gmd:fileIdentifier/gco:CharacterString/text()</xpath>
