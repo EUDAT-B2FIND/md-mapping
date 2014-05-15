@@ -4,6 +4,7 @@
   <namespaces>
     <namespace ns="lom" uri="http://ltsc.ieee.org/xsd/LOM"/> 
     <namespace ns="o" uri="http://www.openarchives.org/OAI/2.0/"/>
+    <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
   </namespaces>
   <mappings>
     <!-- General fields shown above the field/value tables -->
@@ -52,8 +53,8 @@
     <field name="fulltext">
       <xpath>normalize-space(string(/))</xpath>
     </field>
-    <field name="OAI-PMH identifier">
-      <xpath>//record/header/identifier/text()</xpath>
+    <field name="oai_identifier">
+      <xpath>//r:header/r:identifier/text()</xpath>
     </field>
     <field name="MapperVersion">
       <string expand="true">${mapper_version}</string>
