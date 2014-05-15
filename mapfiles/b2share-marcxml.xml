@@ -2,6 +2,7 @@
 <mapping-table>
   <!-- Mappings for MARC XML metadata from B2SHARE. -->
   <namespaces>
+    <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
     <namespace ns="marc" uri="http://www.loc.gov/MARC21/slim"/>
   </namespaces>
   <mappings>
@@ -58,8 +59,8 @@
     <field name="fulltext">
       <xpath>normalize-space(string(/))</xpath>
     </field>
-    <field name="OAI-PMH identifier">
-      <xpath>//record/header/identifier/text()</xpath>
+    <field name="oai_identifier">
+      <xpath>//r:header/r:identifier/text()</xpath>
     </field>
     <field name="MapperVersion">
       <string expand="true">${mapper_version}</string>

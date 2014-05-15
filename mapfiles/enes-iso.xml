@@ -11,8 +11,8 @@
     <field name="fulltext">
       <xpath>normalize-space(string(/))</xpath>
     </field>
-    <field name="OAI-PMH identifier">
-      <xpath>//record/header/identifier/text()</xpath>
+    <field name="oai_identifier">
+      <xpath>//gmd:identifier/text()</xpath>
     </field>
     <field name="MapperVersion">
       <string expand="true">${mapper_version}</string>
