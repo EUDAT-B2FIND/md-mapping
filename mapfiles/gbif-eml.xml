@@ -2,6 +2,7 @@
 <mapping-table>
   <!-- Mappings for eml metadata from GBIF. -->
   <namespaces>
+    <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
     <namespace ns="eml" uri="eml://ecoinformatics.org/eml-2.1.1"/>
     <namespace ns="o" uri="http://www.openarchives.org/OAI/2.0/"/>
     <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
@@ -59,7 +60,7 @@
       <xpath>normalize-space(string(/))</xpath>
     </field>
     <field name="oai_identifier">
-      <xpath>//r:header/r:identifier/text()</xpath>
+      <xpath>//r:record/r:header/r:identifier/text()</xpath>
     </field>
     <field name="MapperVersion">
       <string expand="true">${mapper_version}</string>

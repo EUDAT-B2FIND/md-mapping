@@ -2,6 +2,7 @@
 <mapping-table>
   <!-- Mappings for CMDIfied IMDI profile of CLARIN metadata. -->
   <namespaces>
+    <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
     <namespace ns="cmd" uri="http://www.clarin.eu/cmd/"/>
     <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
   </namespaces>
@@ -18,12 +19,16 @@
       <xpath>//cmd:CMD/cmd:Components/cmd:SongScan/cmd:GeneralInfo/cmd:Title/text()</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:DiscAn_Case/cmd:ProjectName/text()</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:DiscAn_Case/cmd:DiscAn_AnnotatedFeatures/cmd:SubcorpusName/text()</xpath>
+      <xpath>//cmd:CMD/cmd:Components/cmd:LrtInventoryResource/cmd:LrtCommon/cmd:ResourceName/text()</xpath>
+      <xpath>//cmd:Project/cmd:Title/text()</xpath>
     </field>
     <field name="notes">
       <xpath>//cmd:CMD/cmd:Components/cmd:Session/cmd:descriptions/cmd:Description[@LanguageId = 'ISO639:eng' or @LanguageId = 'ISO639-2:eng' or @LanguageId = '']/text()</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:Session/cmd:Resources/cmd:Source/cmd:descriptions/cmd:Description[@LanguageId = 'ISO639:eng' or @LanguageId = 'ISO639-2:eng' or @LanguageId = '']/text()</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:imdi-corpus/cmd:Corpus/cmd:descriptions/cmd:Description[@LanguageId = 'ISO639:eng' or @LanguageId = 'ISO639-2:eng' or @LanguageId = '']/text()</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:Song/cmd:Incipit/cmd:Original/text()</xpath>
+      <xpath>//cmd:CMD/cmd:Components/cmd:LrtInventoryResource/cmd:LrtCommon/cmd:Description/text()</xpath>
+      <xpath>//cmd:Project/cmd:descriptions/cmd:Description/text()</xpath>
     </field>
     <field name="tags">
       <xpath>substring(replace(//cmd:CMD/cmd:Header/cmd:MdCollectionDisplayName/text(),"[:()]","-"),0,50)</xpath>
