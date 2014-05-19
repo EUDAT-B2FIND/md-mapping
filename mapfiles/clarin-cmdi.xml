@@ -4,6 +4,7 @@
   <namespaces>
     <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
     <namespace ns="cmd" uri="http://www.clarin.eu/cmd/"/>
+    <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
   </namespaces>
   <mappings>
    <!-- General fields shown above the field/value tables -->
@@ -82,7 +83,7 @@
       <xpath>normalize-space(string(/))</xpath>
     </field>
     <field name="oai_identifier">
-      <xpath>//r:record/r:header/r:identifier/text()</xpath>
+      <xpath>//r:header/r:identifier/text()</xpath>
     </field>
     <field name="MapperVersion">
       <string expand="true">${mapper_version}</string>
