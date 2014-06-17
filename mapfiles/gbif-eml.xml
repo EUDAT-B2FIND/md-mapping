@@ -6,6 +6,7 @@
     <namespace ns="eml" uri="eml://ecoinformatics.org/eml-2.1.1"/>
     <namespace ns="o" uri="http://www.openarchives.org/OAI/2.0/"/>
     <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
+    <namespace ns="xs" uri="http://www.w3.org/2001/XMLSchema"/>
   </namespaces>
   <mappings>
    <!-- General fields shown above the field/value tables -->
@@ -52,8 +53,24 @@
     <field name="TemporalCoverage:BeginDate">
       <xpath>concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:beginDate/o:calendarDate/text(),'T00:00:00Z')</xpath>
     </field>
+    <field name="TempCoverageBegin">
+      <xpath>
+      if (boolean(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:beginDate/o:calendarDate/text())) then
+      for $i in (xs:dateTime(concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:beginDate/o:calendarDate/text(),'T00:00:00Z'))-xs:dateTime('0001-01-01T00:00:00Z')) 
+         return ((days-from-duration($i)*86400)+(hours-from-duration($i)*3600)+(minutes-from-duration($i)*60)+(seconds-from-duration($i)))
+      else //o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:beginDate/o:calendarDate/text()
+      </xpath>
+    </field>
     <field name="TemporalCoverage:EndDate">
       <xpath>concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:endDate/o:calendarDate/text(),'T23:59:59Z')</xpath>
+    </field>
+    <field name="TempCoverageEnd">
+      <xpath>
+      if (boolean(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:endDate/o:calendarDate/text())) then
+      for $i in (xs:dateTime(concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:endDate/o:calendarDate/text(),'T23:59:59Z'))-xs:dateTime('0001-01-01T00:00:00Z')) 
+         return ((days-from-duration($i)*86400)+(hours-from-duration($i)*3600)+(minutes-from-duration($i)*60)+(seconds-from-duration($i)))
+      else //o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:endDate/o:calendarDate/text()
+      </xpath>
     </field>
     <!-- Hidden fields, only shown to logged in CKAN users -->
     <field name="fulltext">
