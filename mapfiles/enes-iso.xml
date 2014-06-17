@@ -74,35 +74,25 @@
       <xpath>//gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString/text()</xpath>
     </field>
    <field name="TemporalCoverage:BeginDate">
-      <xpath>concat(//gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod[@id="extent_4632" or @id="extent_784800" or @id="extent_24276" or @id="extent_388800"]/gml:beginPosition/text(),'Z')</xpath>
-<!--
-      <xpath>concat(//gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod[1]/gml:beginPosition/text(),'Z')</xpath>
--->
+      <xpath>concat(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text(),'Z')</xpath>
     </field>
     <field name="TempCoverageBegin">
       <xpath>
-      if (boolean(//gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod[@id="extent_4632" or @id="extent_784800" or @id="extent_24276" or @id="extent_388800"]/gml:beginPosition/text())) then
-      for $i in (xs:dateTime(concat(//gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod[@id="extent_4632" or @id="extent_784800" or @id="extent_24276" or @id="extent_388800"]/gml:beginPosition/text(),'Z'))-xs:dateTime('0001-01-01T00:00:00Z')) 
+      if (boolean(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text())) then
+      for $i in (xs:dateTime(concat(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text(),'Z'))-xs:dateTime('0001-01-01T00:00:00Z')) 
          return ((days-from-duration($i)*86400)+(hours-from-duration($i)*3600)+(minutes-from-duration($i)*60)+(seconds-from-duration($i)))
-      else //gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod[@id="extent_4632" or @id="extent_784800" or @id="extent_24276" or @id="extent_388800"]/gml:beginPosition/text()
+      else //gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text()
       </xpath>
     </field>
     <field name="TemporalCoverage:EndDate">
-      <xpath>concat(//gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod[@id = 'extent_4632' or @id = 'extent_784800' or @id="extent_24276" or @id="extent_388800"]/gml:endPosition/text(),'Z')</xpath>
-      <xpath>concat(//gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod[1]/gml:endPosition/text(),'Z')</xpath>
+      <xpath>concat(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition/text(),'Z')</xpath>
     </field>
     <field name="TempCoverageEnd">
       <xpath>
-<!--
-      if (boolean(//gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod[1]/gml:endPosition/text())) then
-      for $i in (xs:dateTime(concat(//gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod[1]/gml:endPosition/text(),'Z'))-xs:dateTime('0001-01-01T00:00:00Z')) 
+      if (boolean(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition/text())) then
+      for $i in (xs:dateTime(concat(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition/text(),'Z'))-xs:dateTime('0001-01-01T00:00:00Z')) 
          return ((days-from-duration($i)*86400)+(hours-from-duration($i)*3600)+(minutes-from-duration($i)*60)+(seconds-from-duration($i)))
-      else //gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod[1]/gml:endPosition/text()
--->
-      if (boolean(//gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod[@id="extent_4632" or @id="extent_784800" or @id="extent_24276" or @id="extent_388800"]/gml:endPosition/text())) then
-      for $i in (xs:dateTime(concat(//gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod[@id="extent_4632" or @id="extent_784800" or @id="extent_24276" or @id="extent_388800"]/gml:endPosition/text(),'Z'))-xs:dateTime('0001-01-01T00:00:00Z')) 
-         return ((days-from-duration($i)*86400)+(hours-from-duration($i)*3600)+(minutes-from-duration($i)*60)+(seconds-from-duration($i)))
-      else //gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod[@id="extent_4632" or @id="extent_784800" or @id="extent_24276" or @id="extent_388800"]/gml:endPosition/text()
+      else //gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition/text()
       </xpath>
    </field>
    <field name="Format">
