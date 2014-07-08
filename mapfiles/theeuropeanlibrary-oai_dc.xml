@@ -27,7 +27,7 @@
       <xpath>//dc:subject/text()</xpath>
     </field>
     <field name="author">
-      <xpath>string-join(distinct-values(//dc:creator/text(),//dc:contributor/text()//dc:description/text()), '; ')</xpath>
+      <xpath>string-join(distinct-values(//dc:creator/text(),//dc:contributor/text()), '; ')</xpath>
     </field>
     <!-- All other visible fields, shown in table 'Additional info' -->
     <field name="PublicationYear">
