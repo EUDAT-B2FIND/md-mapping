@@ -8,10 +8,10 @@
   <mappings>
     <!-- General fields shown above the field/value tables -->
     <field name="title">
-      <xpath>//dc:title/text()</xpath>
+      <xpath>string-join(distinct-values(//dc:title/text()), '; ')</xpath>
     </field>
     <field name="notes">
-      <xpath>string-join(distinct-values(//dc:description/text()), ' | ')</xpath>
+      <xpath>//dc:description/text()</xpath>
     </field>
     <field name="tags">
       <xpath>replace(replace(//dc:type[1]/text(),"info:",""),"[()/]"," ")</xpath>
@@ -27,7 +27,7 @@
       <xpath>//dc:subject/text()</xpath>
     </field>
     <field name="author">
-      <xpath>string-join(distinct-values(//dc:creator/text()), '; ')</xpath>
+      <xpath>string-join(distinct-values(//dc:creator/text(),//dc:contributor/text()//dc:description/text()), '; ')</xpath>
     </field>
     <!-- All other visible fields, shown in table 'Additional info' -->
     <field name="PublicationYear">
