@@ -48,7 +48,9 @@
       <xpath>//marc:datafield[@tag = '546']/marc:subfield[@code = 'a']/text()</xpath>
     </field>
     <field name="Origin">
+      <xpath>//marc:datafield[@tag = '520']/marc:subfield[@code = '9']/text()</xpath>
       <xpath>//marc:datafield[@tag = '856']/marc:subfield[@code = 'y']/text()</xpath>
+      <xpath>//marc:datafield[@tag = '520']/marc:subfield[@code = '9']/text()</xpath>
       <xpath>//marc:datafield[@tag = '260']/marc:subfield[@code = 'b']/text()</xpath>
     </field>
     <field name="Format">
