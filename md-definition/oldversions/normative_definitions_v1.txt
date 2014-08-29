@@ -1,0 +1,232 @@
+
+Different communities
+
+The metadata schema defined is heavily based on the DataCite schema. However, the B2Find catalogue is not created by an existing community. Instead it is intended to present, as uniformly as possible, metadata that finds it's origin in various different communities. Therefore the requirements the DataCite schema puts on properties are, from the B2Find perspective, slightly strict. This, for example, applies to the identifier property. B2Find needs to support more types identifiers than DataCite's DOI.
+
+More abstract properties
+
+Also, in some cases the DataCite schema does not provide an alternative for a B2Find property. While, for example, B2Find's abstract 'origin' property might resemble DataCite's 'creator' property in some ways, the origin of a B2Find resource can be a collection also. This, more passive nature of the property, clearly sets it apart from the pure DataCite 'creator' property. This blocked the replacement of 'origin' by 'creator'.
+
+< elaborate on tags as an extra feature in the relation property | this is another example >
+
+Work towards integration
+
+In resolving differences, as much of DataCite's definitions have been retained. The 'creator' property for example was included, wrapped, in a modified B2Find 'origin' property. However, this wrapping creates a property that, while consistent, is not part of DataCite. We need to establish if in B2Find there is really need for such a property. If there is, there will be a lasting difference between the B2Find and DataCite schema, if there is not, the properties contained in properties like 'origin' need to be adopted by other properties in the schema.
+
+Apart from differences, a considerable part of the DataCite definition is not incorporated in the B2Find schema definition. The reason for this is that the B2Find schema was created for a catalogue already in existence, while the definition should still be considered as being under development. Over time, the B2Find schema definition will become more precise and complete, including as much DataCite elements as possible.
+
+Types
+
+None of the properties currently shown in the catalogue has a type associated to it. In principle, the B2Find schema will not deviate from the types used in the DataCite schema. In order to establish if, for some property, it is possible to stick to the DataCite type, the metadata in the B2Find catalogue needs to be evaluated.
+
+Optional versus mandatory elements
+
+The more properties are mandatory, the more uniform the catalogue will look. There is a balance however, However, since the metadata harvested from the communities is different in nature. Currently, the definition lists a lot of properties as 'optional'. On evaluating the metadata in the catalogue, a number of these could be changed into mandatory properties, as long as the uniformity in the represented metadata is not distorted. In the end, not very different from the DataCite schema, a limited number of properties will be mandatory
+
+Supporting multiplicity
+
+Currently the properties have at the most one occurrence. At the moment, in the current catalogue, a sense of multiplicity is achieved by interpreting property values as lists and appending elements to these. Here the incentive is to avoid duplicates. Analyses of the catalogue's records is needed, together with the modification of the mapping of the collected metadata to the schema used by the catalogue.
+
+Controlled lists
+
+In most cases the elements appearing in controlled lists have not yet been typed themselves. This should be considered as work still to be done. When the catalogue's metadata definition progresses, there will be a point in time when a clear view on the properties will have been achieved, allowing for the definition of controlled list types also. In order to implement controlled lists, some normalisation of metadata properties will be necessary. Give the heterogeneity of the sources of this data, this process will possibly by somewhat time consuming.
+
+Alternative paths
+
+While the origin property expresses a relation, this relation can sometimes be expressed by a description also. And alternatively, the relation property itself can express a relation between resources described by the metadata. This means that a metadata definition allows for alternative paths when it comes to accommodating properties of a resource in one and the same definition. A sound understanding of this will help since it allows you to define a mapping in an alternative way. In the end this will allow for further integrating the B2Find schema.
+
+Normative definition
+
+This definition extends the semantics definition of the B2Find properties. While the semantics definition serves both the catalogue user, or the integration with another system holding metadata, the normative definition is purely intended for system interoperability. It contains technicalities not targeted to the catalogue user.
+
+<
+
+Next to the meaning of a property, a metadata definition also concerns the values the can be assigned to a property. Most of the B2Find properties involve strings, and sometimes, like for example in the case of a date, these values have a specific format, a format ckan or it's extension depend upon. Also, some properties allow for multiple values to be specified.
+
+>
+
+<
+
+This definition needs to be considered when defining a new mapping, a mapping from the metadata fields belonging to a community to a set of B2Find metadata fields.
+
+>
+
+
+
+ 1.0 man, 1    identifier
+
+               Currently, in the catalogue, this property is 'source' and represented in CKAN as 'URL'. This property occurs exactly once in every metadata record. When dealing with multiple references, these should be made by using the relation property, or by referring to a collection. In the latter case there should be a resource that comprises the different referents.
+
+ 1.1 opt, 0..1 IdentifierType
+
+               A classification of identifiers, for example Digital Object Identifiers used by DataCite, handles in the handle system promoted by EPIC, the URN:NBN identifiers used by the national  libraries and other URI type schema's in the form of various combinations of URL and URN.
+
+               The classification takes the form of a controlled list: DOI, EPIC, handle, URL, URN, URI.
+
+               This type property could be mandatory later on, evaluation of catalogue needed.
+
+ 2.0 man, 1..n origin
+
+               In the catalogue, the origin property is associated with different kinds of properties defined by other standards. The
+
+               - 'publisher' property in Dublin Core, the
+               - CLARIN 'MdCollectionDisplayName', and
+               - 'CI_ResponsibleParty' in ENES.
+
+               These different types of properties are reflected in the definition of the origin type. In case of CLARIN, the subtype is 'collection', in case of ENES, the subtype is 'organisation'.
+
+               As a motivation for including a broader range of meaning into a property, one can think at the  wide range of different metadata sources the B2Find metadata catalogue comprises. Here, the number of sources is not decisive. Their difference in nature is however.
+
+               It could be argued that 'origin' should be replaced by the DataCite 'creator' property. While this would certainly cover a considerable number of property values, the property cannot refer to a collection. To allow for this kind of reference, the origin controlled list type definition contains 'collection' as an element.
+
+               With the shift towards a more abstract type of property, the origin property can cover other senses as well. 'Discipline' for example could also be seen as an origin, since you could see a paper or an article as having it's origin in some field or branch of knowledge. For discipline, we currently have the following restrictions in place. In case of
+
+               - CLARIN, the literal 'linguistics' concatenated with genre, in
+               - Dublin Core, the value of the 'subject' property, for
+               - MARC21 a 'Reserved for local implementation' property with tag 980, and for
+               - GBIF, the taxonRankName property
+
+
+               As some resources are explicitly created in the context of a project, you can envisage 'project' to reside under the origin property.
+
+               And because the difference between 'author' and 'contributor' varies, you could use both as a subtype of the 'origin' property as well. Please note that currently contributor it is not part of the catalogue yet. The author origin type can be identified with the 'creator' property in the Dublin Core standard and the 'originator' property in ENES metadata.
+
+               Finally, 'origin' could indicate another resource the resource described by the metadata was derived from. Alternatively, instead of 'origin' you can use the relation property for this. Please refer to the definition of the relation property.
+
+ 2.1 opt, 0..1 OriginType
+
+               Controlled list: creator, author, contributor, maintainer, publisher, organisation, collection, project, identifier
+
+               When specifying 'identifier' as a subtype, the value of the origin property should be the identifier of the intended resource.
+
+ 3.0 man, 0..n title
+               At the moment, the records in the catalogue only carry one title property, multiplicity is obtained by appending.
+
+ 3.1 opt, 0..1 TitleType
+
+               Classification of title in the form of a controlled list: AlternativeTitle, Subtitle, TranslatedTitle
+
+               More elements could be added. These could be mandatory later on. This will be established on, evaluation of catalogue.
+
+ 4.0 man, 0..n description
+
+               Currently, in the catalogue, this property is named 'notes'
+
+ 4.1 opt, 0..1 DescriptionType
+
+               Classification of the description, in the form of a controlled list: table of contents, abstract, method, topic, annotation.
+
+               More elements could be added, could be mandatory later on, evaluation of catalogue needed.
+
+               In the case of an annotation, the constituents are properties of the resource that might or        might not be described by the metadata, for example:
+
+               The audio and video recordings in the ... (collection)
+
+               were digitised ... (contributor)
+
+               at ... ()
+
+               under supervision of ... (contributor)
+
+               in the project ... ()
+
+               financed by ... ()
+
+ 5.0 man,1..n  PublicationDate
+
+               The property groups the PublicationYear and PublicationTimestamp properties in the current catalogue.
+
+               Please note that in case the resource is reissued, this reissue needs to be considered as different resource. Since consequently such a resource will carry a new identifier in it's metadata, the publication date property only needs to occur exactly once. However, different levels of precision are allowed to be specified.
+
+               Contrary to specifying a single point in time, you can also specify an interval. In this case the resource is associated with some specific period in time. The interval, called 'TemporalCoverage' is denoted by two dates: one for the beginning, one for the end of the interval.
+
+ 5.1 man,1     PublicationDateType
+
+               Classification of the publication date. The type specification takes the form of a controlled list: PublicationYear, PublicationTimestamp
+
+               PublicationYear
+
+               The field can only have one metadata field value attached to it, contrary to the Dublin Core standard; there all fields are allowed to have multiple values in the form of a four digit number.
+
+               PublicationTimestamp
+
+               The publication timestamp field denotes a point in time according to the ISO 8601   specification. Example specifications:
+               1995-12-31T23:59:59Z
+               1995-12-31T23:59:59.9Z 1995-12-31T23:59:59.99Z
+               1995-12-31T23:59:59.999Z
+
+	       A 'Z' immediately following the specification string indicates that the time specified should be interpreted as a point in UTC.
+
+ 6.0 opt, 1..n TemporalCoverage
+
+	       A pair of time specifications in ISO 8601 format denoting an interval in time. You can specify multiple pairs. This is relevant for a resource that reflects on various intervals.
+
+ 6.1 man, 1    BeginTimeType
+
+               Begin of an interval; time specified in the ISO 8601 format.
+
+ 6.2 man, 1    EndTimeType
+
+               End of an interval; time specified in the ISO 8601 format. For each point in time that marks the begin of an interval, there should also be a point that specifies it's end.
+
+< from here not complete yet >
+
+ 7.0 opt, 1..n SpatialCoverage
+
+               Check coordinates datatype. Multiple field values could be mapped.
+
+               GeographicDescription
+               Multiple field values can be attached to this field.
+
+               Country
+               Currently, the property is only part of CMDI metadata mapping, see questions. In principle, multiple field values could be attached.
+
+               GeographicCoverage
+               This field could have multiple values attached to it.
+
+
+ 8.0 opt, 1..n Language
+
+	       http://en.wikipedia.org/wiki/ISO_639
+               http://en.wikipedia.org/wiki/ISO_639-2
+               http://en.wikipedia.org/wiki/ISO_639-3
+               DataCite lists both ISO 639-2/B and ISO 639-3
+               Multiple field values are allowed.
+
+ 9.0 opt, 1    Format
+
+	       Multiple field values are allowed, since sometimes a metadata description applies to more than one resource. Investigate if this property is different from the Resource type format.
+
+10.0 opt, 1    Rights
+
+               Multiple field values are allowed.
+
+< until here not complete yet >
+
+11.0 opt, n    Relation
+
+               Any property of the metadata harvested for use in the metadata catalogue can serve as a tag.
+               The tags field's value is a semicolon separated list of strings. No further restriction on the string. Could be any metadata property. In itself this is a restriction of course.
+
+               Instead of a tag, an identifier can be specified. Specifying an identifier is a more direct way of defining a relation on resources: with the tags property you define a relation among resources, with the related identifier you define a relation by resources.
+
+               Like mentioned in the definition of the origin property, the relation property can serve as an alternative when it comes to expressing the relation between resources. Because a metadata record can in principle only describe one resource, the relation property is also suitable to indirectly 'describe' more than one resource.
+
+11.1 man, 1    RelationType
+
+               Classification of the relation. The type specification takes the form of a controlled list: tag, identifier.
+
+Comments on properties not yet in the definition
+
+Alternate identifier
+
+This could be interesting if the situation arises where there is more than one identifier for a resource. Please note that this is different from the situation B2Find is in: different identifiers for different resources. We could however use this property to store a B2Find identifier in, that is: if there is such a thing.
+
+Size
+
+In DataCite, but not currently in use.
+
+Version
+
+In DataCite, Not currently in use.
+
