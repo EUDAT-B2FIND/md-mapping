@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <mapping-table>
-  <!-- Mappings for DublinCore metadata from DataCite. -->
+  <!-- Mappings for DublinCore metadata from . TheEuropeanLibrary-->
   <namespaces>
     <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
     <namespace ns="dc" uri="http://purl.org/dc/elements/1.1/"/>
@@ -8,10 +8,10 @@
   <mappings>
     <!-- General fields shown above the field/value tables -->
     <field name="title">
-      <xpath>string-join(distinct-values(//dc:title/text()), '; ')</xpath>
+      <xpath>string-join(distinct-values(replace(//dc:title[1],"/[/]","")), '; ')</xpath>
     </field>
     <field name="notes">
-      <xpath>//dc:description/text()</xpath>
+      <xpath>//dc:description</xpath>
     </field>
     <field name="tags">
       <xpath>replace(replace(//dc:type[1]/text(),"info:",""),"[()/]"," ")</xpath>
@@ -24,10 +24,13 @@
       <xpath>if (contains(//dc:source/text(),     '[doi:')) then concat('http://dx.doi.org/',substring-before(substring-after(//dc:source/text(), '[doi: '), ']')) else //dc:source/text()</xpath>
     </field>
     <field name="Discipline">
-      <xpath>//dc:subject/text()</xpath>
+      <xpath>//dc:subject</xpath>
     </field>
     <field name="author">
+      <xpath>string-join(distinct-values(//dc:creator/text()), '; ')</xpath>
+<!-- ???
       <xpath>string-join(distinct-values(//dc:creator/text(),//dc:contributor/text()), '; ')</xpath>
+-->
     </field>
     <!-- All other visible fields, shown in table 'Additional info' -->
     <field name="PublicationYear">
@@ -40,8 +43,10 @@
       <xpath>//dc:language/text()</xpath>
     </field>
     <field name="Origin">
-      <xpath>//dc:source[1]/text()</xpath>
+      <xpath>//dc:source/text()</xpath>
+<!--
       <xpath>//dc:publisher/text()</xpath>
+-->
     </field>
     <field name="Format">
       <xpath>//dc:format[not(contains(text(), 'Bytes'))]</xpath>
