@@ -1,0 +1,76 @@
+
+
+B2Find metadata semantics
+
+In the B2Find metadata catalogue you will find metadata gathered from a variety of communities. Because of the difference in nature of the metadata offered by these communities, there exist differences in the building blocks of the metadata, that is: differences in metadata properties. This means that the metadata presented can find itself attached to properties that differ in meaning from the properties in the original communities.
+
+In the B2Find view on the metadata tries to resolve differences, striving for common understanding of the description of resources. We do this by creating new property definitions. This process is continuous, and next to common sense, this process relies on tools such as the Wordnet browser and the Oxford dictionaries. The process results in the following pure semantic definition targeted to the metadata browsing user.
+
+
+B2Find semantic metadata definition
+
+In general, we use the term 'metadata' whenever we refer to a description - a record - of a resource. The description takes the form of a number of properties - the attributes of a resource. As an example of properties, you could think of the 'author' of a work, the resource, in a certain 'discipline', written in specific 'language'. In order to interpret metadata, a clear understanding of the properties is needed. Therefore, we supply the following list of B2Find metadata property definitions. A metadata property definition consists of a metadata property name in B2Find and the meaning attached to it.
+
+ 1 identifier
+
+   An identifier that resolves to the resource describe by the metadata. Not the metadata itself. The source property identifies the original resource like for example text or some digital audio or video format.
+
+
+ 2 origin
+
+   An object associated with the begin of the existence of the resource described by the metadata. The relation can be of an active type. In this case the referent is a person, like for example an author, an  organisation or a group that brought the resource into existence, or a person that can be contacted about the the resource described. While sometimes the maintainer is also responsible for providing the metadata, in general, this relation should not be assumed to exist.
+
+   Broader conceptions of the object associated with the origin are also possible. Think for example at a project, that is: a description of a piece of work associated with the resource that has been or is undertaken. Or even a discipline; a branch of knowledge.
+
+   Alternatively, a more passive interpretation of the relation would be the attribution of the resource to a collection or a larger resource.
+
+
+ 3 title
+
+   One line heading that names a resource and reflects the content of it. A title could for example name (a section of) a written resource.
+
+
+ 4 description
+
+   A reference to a part of the resource, for example: a table of contents, an abstract, the method employed to obtain the resource, or a single topic. Alternatively, a description can be an annotation created as part of the metadata. A description like this can also take the form of an abstract, possibly referring to other metadata properties.
+
+
+ 5 publication date
+semantics
+   A description of the point in time at which the resource described by the metadata was made known to the  public. Depending on the description, different levels of precision can be reached: the date can be a specification of year, or it can be a time stamp.
+
+
+ 6 temporal coverage
+
+   Next to the date of publication, the resource also can have a relation to a specific interval in time. For example: while published in 2013, a work on the history of radio can span an interval starting in the 1870's and continue up to the end of the last century.
+
+
+ 7 spatial coverage
+
+   Denotation of an area the resource described by the metadata is associated with. The denotation can take the form of a list of coordinates. It can also take the form of a 'geographic coverage', like for example: South-Asia.
+
+   Different from denotations in terms of borders there are more qualitative descriptions. Think for example of a country as  an organised body of people, or a territory or area indefinitely bounded like for example 'mountainous area' or 'savanna'. These kind of properties cannot be termed as a location, and are therefore called 'geographic descriptions'.
+
+
+ 8 language
+
+   Specification of the language used in the resource. For example, an English book about Japanese language, will have 'English' as the value of the language field.
+
+ 9 format
+
+   The organisation of information according to preset specifications (computer processing) or tradition (books, physical representation of content).
+
+
+10 rights
+
+   Reference to a document describing the rights to publish the resource described by the metadata. Since metadata is assumed to be publicly available, the rights property always applies to the resource described by the metadata, not to the metadata itself.
+
+
+11 relation
+
+   In addition to the resource referenced by the metadata through the identifier, other resources can also be referenced. These references can take the form of an identifier or a tag. In case of a tag, the relation is defined indirectly, that is: not by referencing a resource. Instead, all records carrying the same tag are defined to be related.
+
+
+Normative definition
+
+In order to for achieve a well define the metadata in the catalogue, the semantic definition alone does not suffice. The necessary precision is laid down in a so-called the normative metadata definition. This definition, on its turn is backed by an XSD representation of the metadata. However, for the user browsing the catalogue, the definition above should be sufficient.

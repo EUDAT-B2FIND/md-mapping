@@ -1,0 +1,126 @@
+Version : 0 (the initial version and first release, formerly called 'Metadata definitions))
+
+Created : In beginning of 2014
+
+Editor : Kees
+
+
+B2Find metadata definition
+
+A B2Find metadata set is defined as a collection of definitions of metadata fields.
+
+Metadata field definition A B2Find metadata field is defined as an attribute of a resource. For example: author, or: language.
+
+The definitions of B2Find metadata fields depend, for a large part, on the current state of the B2Find mappings. That is, the meaning of a metadata field is influenced by a corresponding field in the metadata provided by some community.
+
+Not all communities provide clear definitions of their metadata. And because often the format in which this data presented does not or only partly specify the meaning of the data, we need to define the meaning of metadata by ourselves. In cases like these, and when resolving differences in definitions of fields from different communities, the wordnet browser was used to come up with a sensible and workable definition.
+
+A metadata field definition consists of a metadata field in B2Find and the meaning attached to it. This definition needs to be considered when defining a new mapping, a mapping from the metadata fields belonging to a community to a set of B2Find metadata fields.
+
+Next to the meaning of a field, a metadata definition also concerns the values the can be assigned to a field. Most of the B2Fields involve strings, and sometimes, like for example in the case of a date, these values have a specific format, a format ckan or it's extension depend upon. Also, some fields allow for multiple values to be specified.
+
+Metadata field definitions
+
+title
+One line heading that names a resource, gives a description of it. A title could for example be the name of (a section of) a written resource. A title field needs to have exactly one value.
+
+notes
+
+Annotation, a comment on the resource added in the meta data. The field can only have a single value.
+tags
+
+Like title and notes, the tag field plays a specific role in the ckan user interface. The tags field's value is a semicolon separated list  of strings. An item in this list can be regarded as a link to a list of datasets that carry the same item in their tags field's value.
+
+By defining tags, the user is presented with easy access to datasets that can be considered as similar. In terms of the original meta data, any value of any field can taken to be a tag.
+URL
+
+The URL to the a digital resource described by the meta data. The URL can be considered as a digital object identifier. The identifier should point to the resource itself, not it's meta data. The Source field is mapped into from metadata fields identifying original resources like for example text or some digital audio or video format. Since metadata records can reference multiple of such instances, this field should in principle have multiple values.
+author
+
+Writer, generator or producer of the resource described by the metadata. This field can be identified with the 'creator' field in the Dublin Core standard and the 'originator field in ENES. Since multiple authors can be associated with a resource, the field can have multiple values. In creating a list of authors, the policy is to avoid duplicates.
+spatial
+
+Geographic coordinates associated with the resource, can be compared to 'GeographicCoverage'. Multiple field values could be mapped.
+maintainer
+Person that can be contacted about the the resource described. While sometimes the maintainer is also responsible for providing the metadata, in general, this relation should not be assumed to exist. The maintainer field can have multiple field values attached to it, try to avoid duplicates however.
+Discipline
+
+Subject of the resource described by the metadata, branch of knowledge. Only a single value can be attached to this field. Currently, for
+
+    CLARIN, the literal 'linguistics' concatenated with genre
+    Dublin Core, the value of the 'subject' field,
+    for MARC21 a 'Reserved for local implementation' field with tag 980,
+    and for GBIF, the taxonRankName field
+
+are mapped to this field.
+PublicationYear
+The year in which the resource was made known to the public. The field can only have one metadata field value attached to it, contrary to the Dublin Core standard; there all fields are allowed to have multiple values in the form of a four digit number. 
+PublicationTimestamp
+
+Next to the PublicationYear field the PublicationDatestamp field can be used to allow for more precision. The timestamp field denotes a point in time according to the ISO 8601 specification. Example specifications:
+
+1995-12-31T23:59:59Z
+
+1995-12-31T23:59:59.9Z
+
+1995-12-31T23:59:59.99Z
+
+1995-12-31T23:59:59.999Z
+
+A 'Z' immediately following the specification string indicates that the time specified should be interpreted as a point in UTC.
+Language
+
+Specification of the language used in the resource. For example, an English book about Japanese language, will have 'English' as the value of the language field. Multiple field values are allowed.
+
+Mikael: I suggest the language field should conform to ISO 639-3.
+Origin
+
+What or who the resource brought into existence, name of a person, organisation or group. Alternatively: what the resource is derived from, or a collection a resource belongs to.
+
+    In the Dublin Core standard, the origin is referred to as 'publisher', in
+    CLARIN it is called MdCollectionDisplayName, and for
+    ENES the mapping uses the CI_ResponsibleParty field.
+
+In any case: The origin field refers to the resource described by the metadata. Since the metadata could describe multiple resources, the field can have multiple values attached to it.
+Format
+
+The organisation of information according to preset specifications (computer processing) or tradition (books, physical representation of content). Multiple field values are allowed, since sometimes a metadata description applies to more than one resource.
+GeographicDescription
+
+Description of geographic properties of the source described in the metadata that cannot not be termed as a location.. For example: savanna. For location please use GeographicCoverage. Multiple field values can be attached to this field.
+Rights
+
+Reference to a document describing the rights to publish the resource described by the metadata. Since metadata is assumed to be publicly available, the rights field always applies to the resource described by the metadata, not to the metadata itself. Multiple field values are allowed.
+Project
+
+Description of piece of work associated with the resource that has been or is undertaken. The field could have multiple values attached to it, since multiple projects can involve one and the same resource.
+Country
+
+Organised body of people, territory or area indefinitely bounded like for example 'mountainous area'. Currently, the field is only part of CMDI metadata mapping, see questions. In principle, multiple field values could be attached.
+GeographicCoverage
+
+Denotation of the area the resource described by the metadata is associated with. The coverage is expressed in terms of text, like for example 'South-Asia'. If the metadata to be mapped involves coordinates, the spatial field should be mapped onto. This field could have multiple values attached to it.
+
+TemporalCoverage:BeginDate
+
+TemporalCoverage:EndDate
+
+Denotation of a period in time the resource described by the metadata is associated with. The coverage is expressed by two dates: the begindate and the enddate. The dates need to be specified in UTC format. Only a single value can be associated with each of these fields.
+
+Non-metadata field definitions
+
+OAI-PMH identifier
+A uniform resource name in the sense of rfc1737.
+fulltext
+Not a field that is part of metadata. Instead, it is used for full text search. In principle, the field can have one value attached to it only. The field is referenced by the mapper.
+MetaDataAccess
+The URL pointing to the harvested metadata record, not a field in the metadata itself. This field can only have a single value. The field is outside the scope of mapping. On importing data into ckan, it is added by the manager Python script.
+MapperVersion
+Version of the mapper that created the metadata. This field is used for diagnostic purposes only. Only a single value is allowed.
+Version
+Not the mapper, but the Python script responsible for uploading records to the ckan instance adds the version assigns a value to this field. Version equals the checksum of the JSON record send by the mapper to the script for uploading. The script uses the checksum to determine whether or not a record was modified since the previous time it was created by the mapper. The field should be internal to ckan, that is: it should not be visible to the user
+
+Open questions and issues concerning B2Find metadata.
+
+could be found at https://confluence.csc.fi/display/Eudat/Mapper#Mapper-IssuesandToDos 
+
