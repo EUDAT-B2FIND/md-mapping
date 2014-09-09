@@ -51,7 +51,9 @@
       <xpath>replace(//o:dataset/o:coverage/o:geographicCoverage/o:geographicDescription/text(),"\s+","")</xpath>
     </field>
     <field name="TemporalCoverage:BeginDate">
-      <xpath>concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:beginDate/o:calendarDate/text(),'T00:00:00Z')</xpath>
+      <xpath>if (boolean(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:beginDate/o:calendarDate/text())) then
+      concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:beginDate/o:calendarDate/text(),'T00:00:00Z')
+      else //o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:beginDate/o:calendarDate/text()</xpath>
     </field>
     <field name="TempCoverageBegin">
       <xpath>
@@ -62,7 +64,9 @@
       </xpath>
     </field>
     <field name="TemporalCoverage:EndDate">
-      <xpath>concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:endDate/o:calendarDate/text(),'T23:59:59Z')</xpath>
+      <xpath>if (boolean(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:endDate/o:calendarDate/text())) then
+      concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:endDate/o:calendarDate/text(),'T23:59:59Z')
+      else //o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:beginDate/o:calendarDate/text()</xpath>
     </field>
     <field name="TempCoverageEnd">
       <xpath>
