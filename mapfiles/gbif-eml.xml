@@ -26,7 +26,10 @@
       <xpath>//o:dataset/o:abstract/o:para/text()</xpath>
     </field>
     <field name="Discipline">
+      <string>Biology</string>
+   <!--
       <xpath>//o:dataset/o:coverage/o:taxonomicCoverage/o:taxonomicClassification/o:taxonRankName/text()</xpath>
+    -->
     </field>
     <field name="author">
       <xpath>//o:dataset/o:contact/o:individualName/o:surName[not(text()='null null')]/text()</xpath>
