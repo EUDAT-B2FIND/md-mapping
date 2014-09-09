@@ -47,8 +47,11 @@
       <xpath>if (contains(//gmd:MD_Metadata/gmd:dataSetURI/gco:CharacterString/text(), '[doi:')) then concat('http://dx.doi.org/',substring-before(substring-after(//gmd:MD_Metadata/gmd:dataSetURI/gco:CharacterString/text(), '[doi: '), ']')) else //gmd:MD_Metadata/gmd:dataSetURI/gco:CharacterString/text()</xpath>
     </field>
     <field name="Discipline">
+      <string>Earth Sciences</string>
+<!--
       <xpath>//gmi:MI_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode/text()</xpath>
       <xpath>//gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode/text()</xpath>
+-->
     </field>
     <field name="author">
       <xpath>string-join(distinct-values(//gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty[gmd:role/gmd:CI_RoleCode/@codeListValue = 'author' or gmd:role/gmd:CI_RoleCode/@codeListValue = 'originator']/gmd:individualName/gco:CharacterString[not(text()='not filled')]/text()|//gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString[not(text()='not filled')]/text()), ';')</xpath>

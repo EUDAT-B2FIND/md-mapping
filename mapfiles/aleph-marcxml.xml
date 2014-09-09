@@ -29,7 +29,10 @@
       <xpath>//marc:datafield[@tag = '999']/marc:subfield[@code='c']/text()</xpath>
    </field>
    <field name="Discipline">
+      <string>Physics</string>
+<!--
       <xpath>//marc:datafield[@tag = '650' and @ind1='1' and @ind2='7']/marc:subfield[@code = 'a']/text()</xpath>
+-->
     </field>
     <field name="author">
       <xpath>//marc:datafield[@tag = '999']/marc:subfield[@code = '9']/text()</xpath>
