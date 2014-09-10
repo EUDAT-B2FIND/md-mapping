@@ -88,7 +88,10 @@
       <xpath>normalize-space(string(/))</xpath>
     </field>
     <field name="oai_identifier">
+      <xpath>//dc:identifier/text()</xpath>
+<!--
       <xpath>//r:header/r:identifier/text()</xpath>
+-->
     </field>
     <field name="MapperVersion">
       <string expand="true">${mapper_version}</string>
