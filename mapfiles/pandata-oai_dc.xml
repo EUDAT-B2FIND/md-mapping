@@ -20,7 +20,7 @@
     </field>
     <!-- Central facets, shown in an extra table 'Main fields' (not implemented yet : all fields in table 'Additional info') -->
     <field name="url">
-      <xpath>//dcterms:references/text()</xpath>
+      <xpath>concat('http://',//dcterms:references/text())</xpath>
       <!--
       <xpath>if (contains (string-join(distinct-values(//dc:identifier/text()),' ; '),'doi:')) then concat('http://dx.doi.org/',substring-before(substring-after(string-join(distinct-values(//dc:identifier/text()),' ; '), 'doi:'),' ; ')) else //dc:identifier/text()</xpath>
       <xpath>if (starts-with(//dc:identifier/text(),'10.5286')) then concat('http://dx.doi.org/',//dc:identifier[1]/text()) else //dc:identifier/text()</xpath>
