@@ -16,6 +16,9 @@
       <xpath>string-join(distinct-values(//dc:description/text()), ' | ')</xpath>
     </field>
     <field name="tags">
+<!--
+      <xpath>distinct-values(//dc:relation/text())</xpath>
+-->
       <xpath>//dc:relation/text()</xpath>
     </field>
     <!-- Central facets, shown in an extra table 'Main fields' (not implemented yet : all fields in table 'Additional info') -->
@@ -53,7 +56,7 @@
       <xpath>//dc:format[not(contains(text(), 'Bytes'))]</xpath>
     </field>
     <field name="GeograhicDescription">
-      <xpath>//dc:relation/text()</xpath>
+      <xpath>//dc:relation[@xsi:type="dcterms:ISO3166"]/text()</xpath>
     </field>
     <field name="TemporalCoverage:BeginDate">
       <xpath>concat(string-join(tokenize(substring-before(//dcterms:temporal/text(),';'),' '),'T'),'Z')</xpath>
