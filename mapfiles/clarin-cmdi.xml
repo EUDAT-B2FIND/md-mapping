@@ -41,8 +41,10 @@
       <xpath>concat('http://hdl.handle.net/', replace(//cmd:CMD/cmd:Header/cmd:MdSelfLink/text(),'@format=cmdi',''),'@view')</xpath>
     </field> 
     <field name="Discipline">
+<!--
       <xpath>if (normalize-space(string(//cmd:CMD/cmd:Components/cmd:Session/cmd:MDGroup/cmd:Content/cmd:Genre/text())) = '') then '' else concat('Linguistics - ', string(//cmd:CMD/cmd:Components/cmd:Session/cmd:MDGroup/cmd:Content/cmd:Genre/text()))</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:Session/cmd:Resources/cmd:WrittenResource/cmd:Type/text()</xpath>
+-->
       <string>Linguistics</string>
     </field>
     <field name="author">

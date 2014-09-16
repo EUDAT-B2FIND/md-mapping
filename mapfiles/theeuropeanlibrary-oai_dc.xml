@@ -8,7 +8,10 @@
   <mappings>
     <!-- General fields shown above the field/value tables -->
     <field name="title">
-      <xpath>string-join(distinct-values(replace(//dc:title/text(),"/[/]","")), '; ')</xpath>
+      <xpath>replace(string-join(distinct-values(//dc:title/text()),'; '),"/[/]","")</xpath>
+<!--
+      <xpath>replace(//dc:title//text(),"/[/]","")</xpath>
+-->
     </field>
     <field name="notes">
       <xpath>//dc:description</xpath>
