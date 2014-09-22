@@ -43,8 +43,12 @@
       <xpath>if (contains(//marc:datafield[@tag = '260']/marc:subfield[@code = 'c']/text(), '-')) then substring-before(//marc:datafield[@tag = '260']/marc:subfield[@code = 'c']/text(), '-') else //marc:datafield[@tag = '260']/marc:subfield[@code = 'c']/text()</xpath>
     </field>
     <field name="PublicationTimestamp">
+      <xpath>if (contains(//marc:datafield[@tag = '269']/marc:subfield[@code = 'c']/text(), '-')) then concat(substring-before(//marc:datafield[@tag = '269']/marc:subfield[@code = 'c']/text(), '-'),'-07-01T11:59:59Z') else //marc:datafield[@tag = '269']/marc:subfield[@code = 'c']/text()</xpath>
+      <xpath>if (contains(//marc:datafield[@tag = '260']/marc:subfield[@code = 'c']/text(), '-')) then concat(substring-before(//marc:datafield[@tag = '260']/marc:subfield[@code = 'c']/text(), '-'),'-07-01T11:59:59Z') else //marc:datafield[@tag = '260']/marc:subfield[@code = 'c']/text()</xpath>
+<!--
       <xpath>if (contains(//marc:datafield[@tag = '269']/marc:subfield[@code = 'c']/text(), '-')) then concat(substring-before(//marc:datafield[@tag = '269']/marc:subfield[@code = 'c']/text(), '-'),'-07-01T11:59:59Z') else if boolean(//marc:datafield[@tag = '269']/marc:subfield[@code = 'c']/text()) then concat(//marc:datafield[@tag = '269']/marc:subfield[@code = 'c']/text(),'-07-01T11:59:59Z')</xpath>
       <xpath>if (contains(//marc:datafield[@tag = '260']/marc:subfield[@code = 'c']/text(), '-')) then concat(substring-before(//marc:datafield[@tag = '260']/marc:subfield[@code = 'c']/text(), '-'),'-07-01T11:59:59Z') else if boolean(//marc:datafield[@tag = '260']/marc:subfield[@code = 'c']/text()) then concat(//marc:datafield[@tag = '260']/marc:subfield[@code = 'c']/text(),'-07-01T11:59:59Z')</xpath>
+-->
     </field>
     <field name="Language">
       <xpath>//marc:datafield[@tag = '041']/marc:subfield[@code = 'a']/text()</xpath>
