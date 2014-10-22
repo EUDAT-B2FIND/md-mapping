@@ -47,7 +47,7 @@
       <xpath>//marc:datafield[@tag = '260']/marc:subfield[@code = 'b']/text()</xpath>
     </field>
     <field name="Format">
-      <string>MarcXML</string>
+      <string></string>
     </field>
     <field name="GeograhicDescription">
       <string>N/A</string>
