@@ -16,10 +16,12 @@
       <xpath>string-join(distinct-values(//dc:description/text()), ' | ')</xpath>
     </field>
     <field name="tags">
+      <xpath>distinct-values(replace(//dc:relation[1]/text(),"[\[;()/\]]"," "))</xpath>
 <!--
+      <xpath>replace(string-join(distinct-values(replace(//dc:relation[1]/text(),"[\[;()/\]]"," ")),' '),"[;()/]"," ")</xpath>
       <xpath>distinct-values(//dc:relation/text())</xpath>
--->
       <xpath>//dc:relation/text()</xpath>
+-->
     </field>
     <!-- Central facets, shown in an extra table 'Main fields' (not implemented yet : all fields in table 'Additional info') -->
     <field name="url">

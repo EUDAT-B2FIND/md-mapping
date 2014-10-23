@@ -14,7 +14,13 @@
       <xpath>//o:dataset/o:title/text()</xpath>
     </field>
     <field name="notes">
-      <xpath>//o:dataset/o:abstract/o:para/text()</xpath>
+      <xpath>normalize-unicode(//o:dataset/o:abstract/o:para/text(),'NFC')</xpath>
+<!--
+
+      <xpath>replace(/o:dataset/o:abstract/o:para/text(),'[^\x00-\x80]','')</xpath>
+      <xpath>replace(normalize-unicode(//o:dataset/o:abstract/o:para/text(),'NFKD'),'\P{ASCII}','')</xpath>
+replace(normalize-unicode('gri_gonéwiththèw00mitc','NFKD'),'\P{ASCII}','')
+-->
     </field>
     <field name="tags">
       <xpath>//o:dataset/o:coverage/o:taxonomicCoverage/o:taxonomicClassification/o:taxonRankValue[not(text()='Unknown')]/text()</xpath>
@@ -23,7 +29,6 @@
     <field name="url">
       <xpath>if (contains(//o:dataset/o:abstract/o:para/text(), 'doi:')) then concat('http://dx.doi.org/', replace(//o:dataset/o:abstract/o:para/text(), '.*doi:([^\s]+).*', '$1')) else ''</xpath>
       <xpath>//o:dataset/o:distribution/o:online/o:url/text()</xpath>
-      <xpath>//o:dataset/o:abstract/o:para/text()</xpath>
     </field>
     <field name="Discipline">
       <string>Biology</string>
@@ -54,7 +59,9 @@
       <xpath>replace(//o:dataset/o:coverage/o:geographicCoverage/o:geographicDescription/text(),"\s+","")</xpath>
     </field>
     <field name="TemporalCoverage:BeginDate">
-      <xpath>concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:beginDate/o:calendarDate/text(),'T00:00:00Z')</xpath>
+      <xpath>if (boolean(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:beginDate/o:calendarDate/text())) then
+      concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:beginDate/o:calendarDate/text(),'T00:00:00Z')
+      else //o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:beginDate/o:calendarDate/text()</xpath>
     </field>
     <field name="TempCoverageBegin">
       <xpath>
@@ -65,7 +72,9 @@
       </xpath>
     </field>
     <field name="TemporalCoverage:EndDate">
-      <xpath>concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:endDate/o:calendarDate/text(),'T23:59:59Z')</xpath>
+      <xpath>if (boolean(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:endDate/o:calendarDate/text())) then
+      concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:endDate/o:calendarDate/text(),'T23:59:59Z')
+      else //o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:beginDate/o:calendarDate/text()</xpath>
     </field>
     <field name="TempCoverageEnd">
       <xpath>
