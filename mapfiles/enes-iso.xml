@@ -70,6 +70,8 @@
     </field>
     <field name="Language">
       <!-- Note: this is the language CODE. -->
+      <xpath>string-join(distinct-values(//gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language/gmd:languageCode/gmd:LanguageCode/text()), ';')</xpath>
+      <xpath>string-join(distinct-values(//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language/gmd:languageCode/gmd:LanguageCode/text()), ';')</xpath>
       <xpath>string-join(distinct-values(//gmi:MI_Metadata/gmd:locale/gmd:PT_Locale/gmd:languageCode/gmd:LanguageCode/text()), ';')</xpath>
       <xpath>string-join(distinct-values(//gmd:MD_Metadata/gmd:locale/gmd:PT_Locale/gmd:languageCode/gmd:LanguageCode/text()), ';')</xpath>
     </field>
