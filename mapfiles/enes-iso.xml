@@ -17,6 +17,9 @@
     <field name="oai_identifier">
       <xpath>//r:record/r:header/r:identifier/text()</xpath>
     </field>
+    <field name="oai_set">
+      <xpath>//r:header/r:setSpec/text()</xpath>
+    </field>
     <field name="MapperVersion">
       <string expand="true">${mapper_version}</string>
     </field>
