@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mapping-table>
+  <!-- Mappings for ISO19139 format metadata from ENES. -->
+  <namespaces>
+    <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
+    <namespace ns="xs" uri="http://www.w3.org/2001/XMLSchema"/>
+    <namespace ns="gmi" uri="http://www.isotc211.org/2005/gmi"/>
+    <namespace ns="gmd" uri="http://www.isotc211.org/2005/gmd"/>
+    <namespace ns="gco" uri="http://www.isotc211.org/2005/gco"/>
+    <namespace ns="gml" uri="http://www.opengis.net/gml"/>
+  </namespaces>
+  <mappings>
+    <!-- Hidden fields, only shown to logged in CKAN users -->
+    <field name="fulltext">
+      <xpath>normalize-space(string(/))</xpath>
+    </field>
+    <field name="oai_identifier">
+      <xpath>//r:record/r:header/r:identifier/text()</xpath>
+    </field>
+    <field name="oai_set">
+      <xpath>//r:header/r:setSpec/text()</xpath>
+    </field>
+    <field name="MapperVersion">
+      <string expand="true">${mapper_version}</string>
+    </field>
+    <field name="spatial">
+      <xpath>concat(//gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:westBoundLongitude/gco:Decimal/text(), ',', //gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:southBoundLatitude/gco:Decimal/text(), ',', //gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:eastBoundLongitude/gco:Decimal/text(), ',', //gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:northBoundLatitude/gco:Decimal/text())</xpath>
+    </field>
+    <field name="maintainer">
+      <xpath>//gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString/text()</xpath>
+      <xpath>//gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty[gmd:role/gmd:CI_RoleCode/@codeListValue = 'custodian']/gmd:individualName/gco:CharacterString/text()</xpath>
+      <xpath>//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty[gmd:role/gmd:CI_RoleCode/@codeListValue = 'custodian']/gmd:individualName/gco:CharacterString/text()</xpath>
+    </field>
+   <!-- General fields shown above the field/value tables -->
+    <field name="title">
+      <xpath>//gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:title/gco:CharacterString/text()</xpath>
+      <xpath>//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:title/gco:CharacterString/text()</xpath>
+    </field>
+    <field name="notes">
+      <xpath>//gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract/gco:CharacterString/text()</xpath>
+      <xpath>//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract/gco:CharacterString/text()</xpath>
+    </field>
+    <field name="tags">
+      <xpath>replace(string-join(distinct-values(//gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords[gmd:type/gmd:MD_KeywordTypeCode/@codeListValue = 'theme']/gmd:keyword/gco:CharacterString/text()), ';'),"/","-")</xpath>
+      <xpath>replace(string-join(distinct-values(//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords[gmd:type/gmd:MD_KeywordTypeCode/@codeListValue = 'theme']/gmd:keyword/gco:CharacterString/text()), ';'),"/","-")</xpath>
+    </field>
+    <!-- Central facets, shown in an extra table 'Main fields' (not implemented yet : all fields in table 'Additional info') -->
+    <field name="url">
+      <xpath>if (contains(//gmi:MI_Metadata/gmd:dataSetURI/gco:CharacterString/text(), '[doi:')) then concat('http://dx.doi.org/',substring-before(substring-after(//gmi:MI_Metadata/gmd:dataSetURI/gco:CharacterString/text(), '[doi: '), ']')) else //gmi:MI_Metadata/gmd:dataSetURI/gco:CharacterString/text()</xpath>
+      <xpath>if (contains(//gmd:MD_Metadata/gmd:dataSetURI/gco:CharacterString/text(), '[doi:')) then concat('http://dx.doi.org/',substring-before(substring-after(//gmd:MD_Metadata/gmd:dataSetURI/gco:CharacterString/text(), '[doi: '), ']')) else //gmd:MD_Metadata/gmd:dataSetURI/gco:CharacterString/text()</xpath>
+    </field>
+    <field name="Discipline">
+      <string>Earth Sciences</string>
+<!--
+      <xpath>//gmi:MI_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode/text()</xpath>
+      <xpath>//gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode/text()</xpath>
+-->
+    </field>
+    <field name="author">
+      <xpath>string-join(distinct-values(//gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty[gmd:role/gmd:CI_RoleCode/@codeListValue = 'author' or gmd:role/gmd:CI_RoleCode/@codeListValue = 'originator']/gmd:individualName/gco:CharacterString[not(text()='not filled')]/text()|//gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString[not(text()='not filled')]/text()), ' ;')</xpath>
+      <xpath>string-join(distinct-values(//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty[gmd:role/gmd:CI_RoleCode/@codeListValue = 'author' or gmd:role/gmd:CI_RoleCode/@codeListValue = 'originator']/gmd:individualName/gco:CharacterString[not(text()='not filled')]/text()|//gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString[not(text()='not filled')]/text()), ' ;')</xpath>
+    </field>
+    <!-- All other visible fields, shown in table 'Additional info' -->
+    <field name="PublicationYear">
+      <xpath>if (contains(//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text(), '-')) then substring-before(//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text(), '-') else //gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text()</xpath>
+      <xpath>if (contains(//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text(), '-')) then substring-before(//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text(), '-') else //gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text()</xpath>
+    </field>
+    <field name="PublicationTimestamp">
+<!--
+      <xpath>if (contains(//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text(), '-')) then concat(substring-before(//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text(), '-'), '-07-01T11:59:59Z' ) else concat(//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text(), '-07-01T11:59:59Z' )</xpath>
+-->
+      <xpath>if (contains(//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text(), '-')) then concat(substring-before(//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text(), '-'), '-07-01T11:59:59Z' ) else concat(//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text(), '-07-01T11:59:59Z' ) </xpath>
+    </field>
+    <field name="Language">
+      <!-- Note: this is the language CODE. -->
+      <xpath>string-join(distinct-values(//gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language/gmd:languageCode/gmd:LanguageCode/text()), ';')</xpath>
+      <xpath>string-join(distinct-values(//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language/gmd:languageCode/gmd:LanguageCode/text()), ';')</xpath>
+      <xpath>string-join(distinct-values(//gmi:MI_Metadata/gmd:locale/gmd:PT_Locale/gmd:languageCode/gmd:LanguageCode/text()), ';')</xpath>
+      <xpath>string-join(distinct-values(//gmd:MD_Metadata/gmd:locale/gmd:PT_Locale/gmd:languageCode/gmd:LanguageCode/text()), ';')</xpath>
+    </field>
+    <field name="Origin">
+      <xpath>//gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString/text()</xpath>
+    </field>
+   <field name="TemporalCoverage:BeginDate">
+      <xpath>if (concat(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text(),'Z')='0-00-00T00:00:00Z') then <string>'0000-00-00T00:00:00Z'</string> else concat(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text(),'Z') </xpath>
+    </field>
+    <field name="TemporalCoverage:EndDate">
+      <xpath>concat(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition/text(),'Z')</xpath>
+    </field>
+    <field name="TempCoverageBegin">
+      <xpath>
+      if (//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text()='0-00-00T00:00:00') then
+      for $i in (xs:dateTime('0001-01-01T00:00:00Z')-xs:dateTime('0002-01-01T00:00:00Z')) 
+         return ((days-from-duration($i)*86400)+(hours-from-duration($i)*3600)+(minutes-from-duration($i)*60)+(seconds-from-duration($i)))
+      else if (boolean(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text())) then
+      for $i in (xs:dateTime(concat(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text(),'Z'))-xs:dateTime('0001-01-01T00:00:00Z')) 
+         return ((days-from-duration($i)*86400)+(hours-from-duration($i)*3600)+(minutes-from-duration($i)*60)+(seconds-from-duration($i)))
+      else
+//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text()
+<!--
+      if (boolean(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text())) then
+      for $i in (xs:dateTime(xs:date(cotokenize(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text(),'T')[1],xs:time(tokenize(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text(),'T')[2]))-xs:dateTime('0001-01-01T00:00:00Z'))
+         return ((days-from-duration($i)*86400)+(hours-from-duration($i)*3600)+(minutes-from-duration($i)*60)+(seconds-from-duration($i)))
+      else //gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text()
+-->
+      </xpath>
+    </field>
+    <field name="TempCoverageEnd">
+      <xpath>
+      if (boolean(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition/text())) then
+      for $i in (xs:dateTime(concat(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition/text(),'Z'))-xs:dateTime('0001-01-01T00:00:00Z')) 
+         return ((days-from-duration($i)*86400)+(hours-from-duration($i)*3600)+(minutes-from-duration($i)*60)+(seconds-from-duration($i)))
+      else //gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition/text()
+      </xpath>
+   </field>
+   <field name="Format">
+      <xpath>//gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceFormat/gmd:MD_Format/gmd:version/gco:CharacterString/text()</xpath>
+      <xpath>//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceFormat/gmd:MD_Format/gmd:version/gco:CharacterString/text()</xpath>
+    </field>
+  </mappings>
+</mapping-table>
