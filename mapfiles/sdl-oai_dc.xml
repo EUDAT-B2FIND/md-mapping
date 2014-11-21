@@ -25,7 +25,7 @@
       <xpath>if (contains(//dc:source/text(),     '[doi:')) then concat('http://dx.doi.org/',substring-before(substring-after(//dc:source/text(), '[doi: '), ']')) else //dc:source/text()</xpath>
     </field>
     <field name="Discipline">
-      <xpath><string>Library and museum studies</string></xpath>
+      <xpath><string>"Library and museum studies"</string></xpath>
 <!--      <xpath>//dc:subject/text()</xpath>  -->
     </field>
     <field name="author">
