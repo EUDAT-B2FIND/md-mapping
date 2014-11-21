@@ -62,14 +62,10 @@
     </field>
     <!-- All other visible fields, shown in table 'Additional info' -->
     <field name="PublicationYear">
-      <xpath>if (contains(//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text(), '-')) then substring-before(//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text(), '-') else //gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text()</xpath>
-      <xpath>if (contains(//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text(), '-')) then substring-before(//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text(), '-') else //gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text()</xpath>
+      <xpath>if (contains(//gmd:dateStamp/gco:DateTime/text(), '-')) then substring-before(//gmd:dateStamp/gco:DateTime/text(), '-') else //gmd:dateStamp/gco:DateTime/text()</xpath>
     </field>
     <field name="PublicationTimestamp">
-<!--
-      <xpath>if (contains(//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text(), '-')) then concat(substring-before(//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text(), '-'), '-07-01T11:59:59Z' ) else concat(//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text(), '-07-01T11:59:59Z' )</xpath>
--->
-      <xpath>if (contains(//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text(), '-')) then concat(substring-before(//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text(), '-'), '-07-01T11:59:59Z' ) else concat(//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text(), '-07-01T11:59:59Z' ) </xpath>
+      <xpath>if (contains(//gmd:dateStamp/gco:DateTime/text(), '-')) then concat(substring-before(//gmd:dateStamp/gco:DateTime/text(), '-'), '-07-01T11:59:59Z' ) else concat(//gmd:dateStamp/gco:DateTime/text(), '-07-01T11:59:59Z' ) </xpath>
     </field>
     <field name="Language">
       <!-- Note: this is the language CODE. -->
@@ -82,10 +78,16 @@
       <xpath>//gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString/text()</xpath>
     </field>
    <field name="TemporalCoverage:BeginDate">
-      <xpath>if (concat(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text(),'Z')='0-00-00T00:00:00Z') then <string>'0000-00-00T00:00:00Z'</string> else concat(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text(),'Z') </xpath>
+<!--
+      <xpath>if (concat(//extent/gmd:EX_extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text(),'Z')='0-00-00T00:00:00Z') then <string>'0000-00-00T00:00:00Z'</string> else concat(//extent/gmd:EX_extent/gmd:temporalElement/gmd:EX_TemporalExtent/extent/gml:TimePeriod/gml:beginPosition/text(),'Z') </xpath>
+-->
+      <xpath>//gml:TimePeriod/gml:beginPosition/text()</xpath>
+<!--
+      <xpath>//gmd:dateStamp/gco:DateTime/text()</xpath>
+-->
     </field>
     <field name="TemporalCoverage:EndDate">
-      <xpath>concat(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition/text(),'Z')</xpath>
+      <xpath>concat(//temporalElement[1]/EX_TemporalExtent/extent/gml:TimePeriod/gml:endPosition/text(),'Z')</xpath>
     </field>
     <field name="TempCoverageBegin">
       <xpath>
@@ -97,20 +99,14 @@
          return ((days-from-duration($i)*86400)+(hours-from-duration($i)*3600)+(minutes-from-duration($i)*60)+(seconds-from-duration($i)))
       else
 //gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text()
-<!--
-      if (boolean(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text())) then
-      for $i in (xs:dateTime(xs:date(cotokenize(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text(),'T')[1],xs:time(tokenize(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text(),'T')[2]))-xs:dateTime('0001-01-01T00:00:00Z'))
-         return ((days-from-duration($i)*86400)+(hours-from-duration($i)*3600)+(minutes-from-duration($i)*60)+(seconds-from-duration($i)))
-      else //gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text()
--->
       </xpath>
     </field>
     <field name="TempCoverageEnd">
       <xpath>
-      if (boolean(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition/text())) then
-      for $i in (xs:dateTime(concat(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition/text(),'Z'))-xs:dateTime('0001-01-01T00:00:00Z')) 
+      if (boolean(//temporalElement[1]/EX_TemporalExtent/extent/gml:TimePeriod/gml:endPosition/text())) then
+      for $i in (xs:dateTime(concat(//temporalElement[1]/EX_TemporalExtent/extent/gml:TimePeriod/gml:endPosition/text(),'Z'))-xs:dateTime('0001-01-01T00:00:00Z')) 
          return ((days-from-duration($i)*86400)+(hours-from-duration($i)*3600)+(minutes-from-duration($i)*60)+(seconds-from-duration($i)))
-      else //gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition/text()
+      else //temporalElement[1]/EX_TemporalExtent/extent/gml:TimePeriod/gml:endPosition/text()
       </xpath>
    </field>
    <field name="Format">
