@@ -1,0 +1,70 @@
+Id	Level	Area	RefName
+2	1	Humanities	Humanities
+2.1	2	Humanities	Human History
+2.2	2	Humanities	Linguistics
+2.2.10	3	Humanities	Philology
+2.3	2	Humanities	Literature
+2.4	2	Humanities	Arts
+2.4.1	3	Humanities	Performing Arts
+2.4.1.2	4	Humanities	Music
+2.4.2	3	Humanities	Visual Arts
+2.4.3	3	Humanities	Applied Arts
+2.4.4	3	Humanities	Other Arts
+2.5	2	Humanities	Philosophy
+2.6	2	Humanities	Religion
+2.6.1	3	Humanities	Abrahamic Religion
+2.6.1	3	Humanities	Abrahamic Religion
+2.6.1.1	4	Humanities	Chritianity
+2.6.1.1.1	5	Humanities	Christian Theology
+3	1	Social sciences	Social Sciences
+3.1	2	Social sciences	Anthropology
+3.2	2	Social sciences	Archaeology
+3.3	2	Social sciences	Area Studies
+3.4	2	Social sciences	Cultural and Ethnic Studies
+3.5	2	Social sciences	Economics
+3.6	2	Social sciences	Gender and Sexuality Studies
+3.7	2	Social sciences	Geography
+3.7.1	3	Social sciences	Cartography
+3.8	2	Social sciences	Political Science
+3.9	2	Social sciences	Psychology
+3.10	2	Social sciences	Sociology
+4	1	Natural sciences	Natural Sciences
+4.1	2	Natural sciences	Biology
+4.1.2	3	Natural sciences	Anatomy
+4.2	2	Natural sciences	Chemistry
+4.3	2	Natural sciences	Earth Sciences
+4.4	2	Natural sciences	Physics
+4.4.2	3	Natural sciences	Astrophysics
+4.5	2	Natural sciences	Space Sciences
+4.5.2	3	Natural sciences	Astronomy
+5	1	Formal sciences	Formal Sciences
+5.1	2	Formal sciences	Mathematics
+5.1.1	3	Formal sciences	Applied	Mathematics
+5.1.2	3	Formal sciences	Pure Mathematics
+5.2	2	Formal sciences	Computer Sciences
+5.3	2	Formal sciences	Logic
+5.4	2	Formal sciences	Statistics
+5.5	2	Formal sciences	Systems Science
+6	1	Professions	Professions
+6.1	2	Professions	Agriculture
+6.2	2	Professions	Architecture and Design
+6.3	2	Professions	Business
+6.4	2	Professions	Divinity
+6.5	2	Professions	Education
+6.6	2	Professions	Engineering
+6.6.1	3	Professions	Chemical Engineering
+6.6.2	3	Professions	Civil Engineering
+6.6.3	3	Professions	Electrical Engineering
+6.6.4	3	Professions	Materials Science and Engineering
+6.6.5	3	Professions	Mechanical Engineering
+6.7	2	Professions	Environmental Studies and Forestry
+6.8	2	Professions	Family and Consumer Science
+6.9	2	Professions	Human Physical Performance and Recreation
+6.10	2	Professions	Journalism, Media Studies and Communication
+6.11	2	Professions	Law
+6.12	2	Professions	Library and Museum Studies
+6.13	2	Professions	Medicine
+6.14	2	Professions	Military Sciences
+6.15	2	Professions	Public Administration
+6.16	2	Professions	Social Work
+6.17	2	Professions	Transportation

@@ -67,7 +67,7 @@
       <xpath>if (matches(//cmd:CMD/cmd:Header/cmd:MdCreationDate/text(), '[12]\d{3}')) then concat(replace(//cmd:CMD/cmd:Header/cmd:MdCreationDate/text(), '.*([12]\d{3}).*', '$1'),'-07-01T11:59:59Z') else ''</xpath>
     </field>
     <field name="Language">
-      <xpath>//cmd:CMD/cmd:Components/cmd:Session/cmd:MDGroup/cmd:Content/cmd:Content_Languages/cmd:Content_Language/cmd:Name/text()</xpath>
+      <xpath>//cmd:CMD/cmd:Components/cmd:Session/cmd:MDGroup/cmd:Content/cmd:Content_Languages/cmd:Content_Language/cmd:Id/text()</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:Song/cmd:Language/cmd:LanguageName/text()</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:DiscAn_Case/cmd:Language/cmd:LanguageName/text()</xpath>
     </field>
@@ -86,6 +86,9 @@
     </field>
     <field name="oai_identifier">
       <xpath>//r:header/r:identifier/text()</xpath>
+    </field>
+    <field name="oai_set">
+      <xpath>//r:header/r:setSpec/text()</xpath>
     </field>
     <field name="MapperVersion">
       <string expand="true">${mapper_version}</string>

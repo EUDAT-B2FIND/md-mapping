@@ -14,7 +14,7 @@
       <xpath>//marc:datafield[@tag = '520']/marc:subfield[@code = 'a']/text()</xpath>
     </field>
     <field name="tags">
-      <xpath>//marc:datafield[@tag = '653']/marc:subfield[@code = 'a']/text()</xpath>
+      <xpath>distinct-values(replace(//marc:datafield[@tag = '653'][1]/marc:subfield[@code = 'a']/text(),"[\[;()/\]]"," "))</xpath>
     </field>
     <!-- Central facets, shown in an extra table 'Main fields' (not implemented yet : all fields in table 'Additional info') -->
     <field name="url">
@@ -46,9 +46,11 @@
     <field name="Origin">
       <xpath>//marc:datafield[@tag = '260']/marc:subfield[@code = 'b']/text()</xpath>
     </field>
+<!-- N/A !!
     <field name="Format">
       <string></string>
     </field>
+-->
     <field name="GeograhicDescription">
       <string>N/A</string>
     </field>
@@ -61,6 +63,9 @@
     </field>
     <field name="oai_identifier">
       <xpath>//r:header/r:identifier/text()</xpath>
+    </field>
+    <field name="oai_set">
+      <xpath>//r:header/r:setSpec/text()</xpath>
     </field>
     <field name="MapperVersion">
       <string expand="true">${mapper_version}</string>
