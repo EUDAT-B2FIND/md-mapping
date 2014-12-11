@@ -29,6 +29,12 @@
    <field name="Discipline">
       <xpath>//marc:datafield[@tag = '980']/marc:subfield[@code = 'a']/text()</xpath>
     </field>
+   <field name="B2SHARE-Domain">
+<!--
+      <xpath>//marc:datafield[@tag = '980']/marc:subfield[@code = 'a']/text()</xpath>
+-->
+      <xpath>//r:header/r:setSpec/text()</xpath>
+    </field>
     <field name="author">
       <xpath>//marc:datafield[@tag = '100']/marc:subfield[@code = 'a']/text()</xpath>
       <xpath>//marc:datafield[@tag = '700']/marc:subfield/text()</xpath>
@@ -58,6 +64,9 @@
     <!-- Hidden fields, only shown to logged in CKAN users -->
     <field name="fulltext">
       <xpath>normalize-space(string(/))</xpath>
+    </field>
+    <field name="oai_set">
+      <xpath>//r:header/r:setSpec/text()</xpath>
     </field>
     <field name="oai_identifier">
       <xpath>//r:header/r:identifier/text()</xpath>

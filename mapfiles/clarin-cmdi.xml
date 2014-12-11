@@ -20,6 +20,7 @@
       <xpath>//cmd:CMD/cmd:Components/cmd:DiscAn_Case/cmd:ProjectName/text()</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:DiscAn_Case/cmd:DiscAn_AnnotatedFeatures/cmd:SubcorpusName/text()</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:LrtInventoryResource/cmd:LrtCommon/cmd:ResourceName/text()</xpath>
+      <xpath>//cmd:CMD/cmd:Components/cmd:teiHeader/cmd:fileDesc/cmd:sourceDesc/cmd:biblStruct/cmd:analytic/cmd:title/text()</xpath>
       <xpath>//cmd:Project/cmd:Title/text()</xpath>
     </field>
     <field name="notes">
