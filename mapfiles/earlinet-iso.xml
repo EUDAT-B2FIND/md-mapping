@@ -37,8 +37,8 @@
       <xpath>//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:title/gco:CharacterString/text()</xpath>
     </field>
     <field name="notes">
-      <xpath>//gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract/gco:CharacterString/text()</xpath>
-      <xpath>//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract/gco:CharacterString/text()</xpath>
+      <xpath>replace(//gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract/gco:CharacterString/text(),"\r","")</xpath>
+      <xpath>replace(//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract/gco:CharacterString/text(),"\s+","")</xpath>
     </field>
     <field name="tags">
       <xpath>replace(string-join(distinct-values(//gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords[gmd:type/gmd:MD_KeywordTypeCode/@codeListValue = 'theme']/gmd:keyword/gco:CharacterString/text()), ';'),"/","-")</xpath>
@@ -50,8 +50,9 @@
       <xpath>if (contains(//gmd:MD_Metadata/gmd:dataSetURI/gco:CharacterString/text(), '[doi:')) then concat('http://dx.doi.org/',substring-before(substring-after(//gmd:MD_Metadata/gmd:dataSetURI/gco:CharacterString/text(), '[doi: '), ']')) else //gmd:MD_Metadata/gmd:dataSetURI/gco:CharacterString/text()</xpath>
     </field>
     <field name="Discipline">
-      <string>Earth Sciences</string>
+      <string>Atmospheric chemistryi; Environmental science; Geophysics; Volcanology</string>
 <!--
+      <string>Earth Sciences</string>
       <xpath>//gmi:MI_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode/text()</xpath>
       <xpath>//gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode/text()</xpath>
 -->
