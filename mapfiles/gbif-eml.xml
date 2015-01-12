@@ -42,7 +42,7 @@ replace(normalize-unicode('gri_gonéwiththèw00mitc','NFKD'),'\P{ASCII}','')
     </field>
     <!-- All other visible fields, shown in table 'Additional info' -->
     <field name="PublicationYear">
-      <xpath>if (contains(//o:dataset/o:pubDate/text(), '-')) then substring-before(//o:dataset/o:pubDate/text(), '-') else //o:dataset/o:pubDate/text()</xpath>
+      <xpath>//o:dataset/o:pubDate/text()</xpath>
     </field>
     <field name="PublicationTimestamp">
       <xpath>if (contains(//o:dataset/o:pubDate/text(), '-')) then concat(substring-before(//o:dataset/o:pubDate/text(), '-'),'-07-01T11:59:59Z') else concat(//o:dataset/o:pubDate/text(),'-07-01T11:59:59Z') </xpath>

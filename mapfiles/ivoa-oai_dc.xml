@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <mapping-table>
-  <!-- Mappings for DublinCore metadata from DataCite. -->
+  <!-- Mappings for DublinCore metadata from IVOA. -->
   <namespaces>
     <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
     <namespace ns="dc" uri="http://purl.org/dc/elements/1.1/"/>
@@ -19,29 +19,35 @@
     <!-- Central facets, shown in an extra table 'Main fields' (not implemented yet : all fields in table 'Additional info') -->
     <field name="url">
       <!--
-      <xpath>if (contains (string-join(distinct-values(//dc:identifier/text()),' ; '),'doi:')) then concat('http://dx.doi.org/',substring-before(substring-after(string-join(distinct-values(//dc:identifier/text()),' ; '), 'doi:'),' ; ')) else //dc:identifier/text()</xpath> -->
+      <xpath>if (contains (string-join(distinct-values(//dc:identifier/text()),' ; '),'doi:')) then concat('http://dx.doi.org/',substring-before(substring-after(string-join(distinct-values(//dc:identifier/text()),' ; '), 'doi:'),' ; ')) else //dc:identifier/text()</xpath>
       <xpath>string-join(distinct-values(//dc:identifier/text()), '; ')</xpath>
-      <xpath>if (contains (//dc:identifier[1]/text(),'ivo:')) then concat('http://registry.astrogrid.org/astrogrid-registry/main/tree/',substring-after(//dc:identifier[1]/text(),'ivo:')) else //dc:identifier/text()</xpath>
+      -->
+      <xpath>if (contains (//dc:identifier[1]/text(),'ivo:')) then concat('http://registry.astrogrid.org/astrogrid-registry/main/tree',substring-after(//dc:identifier[1]/text(),'ivo:/')) else //dc:identifier/text()</xpath>
+      <!--
       <xpath>if (contains(//dc:source/text(),     '[doi:')) then concat('http://dx.doi.org/',substring-before(substring-after(//dc:source/text(), '[doi: '), ']')) else //dc:source/text()</xpath>
+      -->
     </field>
     <field name="Discipline">
-      <xpath>//dc:subject/text()</xpath>
+      <string>Astronomy</string>
     </field>
     <field name="author">
       <xpath>string-join(distinct-values(//dc:creator/text()), '; ')</xpath>
     </field>
     <!-- All other visible fields, shown in table 'Additional info' -->
     <field name="PublicationYear">
+      <xpath>//r:datestamp/text()</xpath>
+     <!--
       <xpath>if (contains(//dc:date[1]/text(), '-')) then substring-before(//dc:date[1]/text(), '-') else //dc:date[1]/text()</xpath>
+      -->
     </field>
     <field name="PublicationTimestamp">
+      <xpath>if (matches(//r:datestamp[1]/text(), '[12]\d{3}.*')) then if(contains(//r:datestamp[1]/text(), '-')) then concat(substring-before(//r:datestamp[1]/text(), '-'),'-07-01T11:59:59Z') else concat(//r:datestamp[1]/text(),'-07-01T11:59:59Z') else '' </xpath>
       <xpath>if (matches(//dc:date[1]/text(), '[12]\d{3}.*')) then if(contains(//dc:date[1]/text(), '-')) then concat(substring-before(//dc:date[1]/text(), '-'),'-07-01T11:59:59Z') else concat(//dc:date[1]/text(),'-07-01T11:59:59Z') else '' </xpath>
     </field>
     <field name="Language">
       <xpath>//dc:language/text()</xpath>
     </field>
     <field name="Origin">
-      <xpath>//dc:source[1]/text()</xpath>
       <xpath>//dc:publisher/text()</xpath>
     </field>
     <field name="Format">
@@ -59,6 +65,9 @@
     </field>
     <field name="oai_identifier">
       <xpath>//r:header/r:identifier/text()</xpath>
+    </field>
+    <field name="oai_set">
+      <xpath>//r:header/r:setSpec/text()</xpath>
     </field>
     <field name="MapperVersion">
       <string expand="true">${mapper_version}</string>

@@ -1,98 +1,122 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <mapping-table>
-  <!-- NOTE. This work is ongoing, this is just a small starting point. -->
-  <!-- Mappings for DDI 1.2.2. -->
+  <!-- Mappings for DDI metadata version 1.2.2. - adapted to B2FIND -->
   <namespaces>
-    <!-- This version doesn't define any namespaces! -->
-    <namespace ns="o" uri="http://www.openarchives.org/OAI/2.0/"/>
+<!-- ??? works not with DDI namespace ???
+    <namespace ns="d" uri="http://www.icpsr.umich.edu/DDI"/>
+-->
+    <namespace ns="d" uri="http://www.openarchives.org/OAI/2.0/"/>
     <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
   </namespaces>
   <mappings>
    <!-- General fields shown above the field/value tables -->
-    <field name="title">
-      <xpath>//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:titlStmt/o:titl/text()</xpath>
-    </field>
-    <field name="notes">
-      <xpath>//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:verStmt/o:notes/text()</xpath>
-<!--
-      <xpath>//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:titlStmt/o:serName/o:serStmt/o:citationi/o:dataAccs/o:useStmt/o:citReq/text()</xpath>
-      <xpath>//o:record/o:metadata/o:codeBook/o:stdyDscr/o:stdyInfo/o:abstract/text()</xpath>
--->
-    </field>
+   <field name="title">
+      <xpath>//d:codeBook/d:stdyDscr/d:citation/d:titlStmt/d:titl/text()</xpath>
+      <xpath>//d:codeBook/d:docDscr/d:citation/d:titlStmt/d:titl/text()</xpath>
+      <string>(untitled)</string>
+   </field>
+   <field name="notes">
+       <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:abstract/text()</xpath>
+       <xpath>//d:codeBook/d:stdyDscr/d:dataAccs/d:useStmt/d:citReq/text()</xpath>
+   </field>
     <field name="tags">
-       <xpath>//o:dataset/o:coverage/o:taxonomicCoverage/o:taxonomicClassification/o:taxonRankValue[not(text()='Unknown')]/text()</xpath>
-    </field>
-    <!-- Central facets, shown in table 'Additional info' -->
-    <field name="url">
-          <xpath>//o:record/o:metadata/o:codeBook/o:stdyDscr/o:dataAccs/o:setAvail/o:accsPlac/text()</xpath>
-<!--
-          <xpath>//o:record/o:metadata/o:codeBook/o:stdyDscr/o:dataAccs/o:setAvail/o:accsPlac[@URI]/text()</xpath>
-          <xpath>if (contains(//o:dataset/o:abstract/o:para/text(), 'doi:')) then concat('http://dx.doi.org/', replace(//o:dataset/o:abstract/o:para/text(), '.*doi:([^\s]+).*', '$1')) else ''</xpath>
--->
-    </field>
-    <field name="Discipline">
-           <xpath>//o:dataset/o:coverage/o:taxonomicCoverage/o:taxonomicClassification/o:taxonRankName/text()</xpath>
-    </field>
-    <field name="author">
-       <xpath>//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:distStmt/o:contact/text()</xpath>
-       <xpath>//o:dataset/o:contact/o:individualName/o:surName[not(text()='null null')]/text()</xpath>
-       <xpath>if (contains(//o:dataset/o:abstract/o:para/text(), ':')) then substring-before(//o:dataset/o:abstract/o:para[not(text()='null null')]/text(), ':') else //o:dataset/o:abstract/o:para[not(text()='null null')]/text()</xpath>
-    </field>
-    <!-- All other visible fields, shown in table 'Additional info' -->
-    <field name="PublicationYear">
-        <xpath>if (contains(//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:prodDate/text(), '-')) then substring-before(//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:prodDate/text(), '-') else //o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:prodDate/text()</xpath>
-<!--
-     <xpath>if (contains(//o:dataset/o:pubDate/text(), '-')) then substring-before(//o:dataset/o:pubDate/text(), '-') else //o:dataset/o:pubDate/text()</xpath>
--->
-    </field>
-    <field name="PublicationTimestamp">
-        <xpath>if (contains(//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:prodDate/text(), '-')) then concat(substring-before(//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:prodDate/text(), '-'),'-07-01T11:59:59Z') else concat(//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:prodDate/text(),'-07-01T11:59:59Z') </xpath>
-    </field>
-    <field name="Origin">
-          <xpath>//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:titlStmt/o:prodDate/o:software/text()</xpath>
-    </field>
-    <field name="GeographicCoverage">
-          <xpath>replace(//o:dataset/o:coverage/o:geographicCoverage/o:geographicDescription/text(),"\s+","")</xpath>
-    </field>
-    <field name="TemporalCoverage:BeginDate">
-          <xpath>concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:beginDate/o:calendarDate/text(),'T00:00:00Z')</xpath>
-    </field>
-    <field name="TemporalCoverage:EndDate">
-           <xpath>concat(//o:dataset/o:coverage/o:temporalCoverage/o:rangeOfDates/o:endDate/o:calendarDate/text(),'T23:59:59Z')</xpath>
-    </field>
-    <!-- Hidden fields, only shown to logged in CKAN users -->
-    <field name="fulltext">
-          <xpath>normalize-space(string(/))</xpath>
-    </field>
-    <field name="MapperVersion">
-          <string>0.1.3266</string>
-    </field>
+       <xpath>string-join(distinct-values(replace(//d:codeBook/d:stdyDscr/d:stdyInfo/d:subject/d:keyword/text(),"[\[;()/\]]"," ") | replace(//d:codeBook//d:stdyDscr//d:stdyInfo//d:subject//d:topcClas/text(),"[\[;()/\]]"," ") ), '; ')</xpath>
+   </field>
+   <field name="url">
+       <xpath>//d:codeBook/d:stdyDscr/d:dataAccs/d:setAvail/d:accsPlac/@URI</xpath>
+   </field>
+   <field name="Discipline">
+        <!-- ??? or map all to Social sciences' ?? -->
+        <xpath>//d:codeBook/d:stdyInfo/d:subject/d:topClass/text()</xpath>
+   </field>
+    <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
 
-    <!-- All other visible fields, shown in table 'Additional info' -->
-    <field name="PublicationTimestamp">
-      <!-- The source fields are UNSTRUCTURED. A date normalizer is needed here (planned mapper improvement). -->
-      <xpath>//codeBook/docDscr/citation/prodStmt/prodDate/@date</xpath>
-      <xpath>//codeBook/docDscr/citation/prodStmt/prodDate/text()</xpath>
+   <field name="author">
+   <!-- Concatenate attribute value of att "affiliation" to value of "Authoring Entity/Primary Investigator" element if applicable. -->
+      <xpath>//d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:AuthEnty/text()</xpath>
+<!--
+      <xpath>if (//d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:AuthEnty/@affiliation) then (
+ concat(//d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:AuthEnty/text(),
+ '(',//d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:AuthEnty/@affiliation,')') ) else
+ (//d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:AuthEnty/text())</xpath>
+      <xpath>/d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:othId/text()</xpath>
+-->
+   </field>
+   <field name="Language">
+       <!-- No good filed to map language to in DDI 1.2.2 so we just grab the first xml:lang attribute -->
+       <xpath>/d:codeBook/@xml:lang</xpath>
+       <xpath>/d:codeBook/@xml-lang</xpath>
+   </field>
+   <!-- The date field is unstructured. A date unifying function will be implemented later. -->
+   <field name="PublicationYear">
+        <xpath>//d:codeBook/d:docDscr/d:citation/d:prodStmt/d:distDate/text()</xpath>
+        <xpath>//d:codeBook/d:docDscr/d:citation/d:prodStmt/d:prodDate/@date</xpath>
+        <xpath>//d:codeBook/d:docDscr/d:citation/d:prodStmt/d:prodDate/text()</xpath>
+   </field>
+   <field name="PublicationTimestamp">
+        <xpath>//d:codeBook/d:docDscr/d:citation/d:prodStmt/d:prodDate/@date</xpath>
+        <xpath>//d:codeBook/d:docDscr/d:citation/d:prodStmt/d:prodDate/text()</xpath>
+   </field>
+   <field name="format">
+        <xpath>//d:codeBook/d:fileDscr/d:fileType/text()</xpath>
+   </field>
+   <field name="Country">
+        <xpath>string-join(distinct-values(//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:nation/text()), '; ')</xpath>
+   </field>
+   <field name="PID">
+       <xpath>//d:codeBook/d:stdyDscr/d:citation/d:titlStmt/d:IDNo/text()</xpath>
+       <xpath>string-join(distinct-values(/d:codeBook/d:stdyDscr/d:citation/d:titlStmt/d:IDNo/text()), '; ')  </xpath>
+       <xpath>/d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:othId[@type="DOI"]/text()</xpath>
     </field>
-    <field name="Origin">
-      <xpath>//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:software/text()</xpath>
-      <xpath>//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:prodPlace/text()</xpath>
+ <!--
+    <field name="MetadataSource">
+        <string expand="true">${filename}</string>
     </field>
-    <field name="Format">
-      <xpath>//codeBook/fileDscr//fileType//text()</xpath>
+ -->
+    <field name="fulltext">
+       <xpath>normalize-space(string(/))</xpath>
     </field>
     <field name="Rights">
-      <xpath>//o:record/o:metadata/o:codeBook/o:docDscr/o:citation/o:prodStmt/o:copyright/text()</xpath>
+       <xpath>/d:codeBook/d:stdyInfo/d:citation/d:prodStmt/d:copyright/text()</xpath>
+       <xpath>/d:codeBook/d:stdyDscr/d:citation/d:prodStmt/d:copyright/text()</xpath>
+       <xpath>/d:codeBook/d:stdyDscr/d:dataAccs/d:setAvail/d:avlStatus/text()</xpath>
     </field>
-    <!-- Hidden fields, only shown to logged in CKAN users -->
-    <field name="fulltext">
-      <xpath>normalize-space(string(/))</xpath>
+    <field name="ResourceType">
+       <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:dataKind/text()</xpath>
     </field>
+    <field name="SpatialCoverage">
+       <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:geogCover/d:txt/text()</xpath>
+       <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:geogCover/text()</xpath>
+    </field>
+   <field name="TemporalCoverage:BeginDate">
+       <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:timePrd[@event="start"]/@date</xpath>
+    </field>
+    <field name="TemporalCoverage:EndDate">
+       <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:timePrd[@event="end"]/@date</xpath>
+    </field>
+    <field name="TempCoverageBegin">
+       <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:timePrd[@event="start"]/@date</xpath>
+    </field>
+    <field name="TempCoverageEnd">
+       <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:timePrd[@event="end"]/@date</xpath>
+    </field>
+    <field name="Origin">
+        <xpath>//d:codeBook/d:stdyDscr/d:citation/d:prodStmt/d:producer/@d:affiliation</xpath>
+        <xpath>string-join(distinct-values(//d:codeBook/d:stdyInfo/d:citation/d:prodStmt/d:producer/text()), '; ')</xpath>
+    </field>
+<!--
+    <field name="MetadataSchema">
+        <string>http://www.icpsr.umich.edu/DDI/Version1-2-2.xsd</string>
+    </field>
+-->
     <field name="oai_identifier">
       <xpath>//r:header/r:identifier/text()</xpath>
     </field>
+    <field name="oai_set">
+      <xpath>//r:header/r:setSpec/text()</xpath>
+    </field>
     <field name="MapperVersion">
-	<string expand="true">${mapper_version}</string>
+      <string expand="true">${mapper_version}</string>
     </field>
   </mappings>
 </mapping-table>
