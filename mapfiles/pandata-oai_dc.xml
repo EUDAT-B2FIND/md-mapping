@@ -43,7 +43,7 @@
     </field>
     <!-- All other visible fields, shown in table 'Additional info' -->
     <field name="PublicationYear">
-      <xpath>if (contains(//dcterms:issued/text(), '-')) then substring-before(//dcterms:issued/text(), '-') else //dcterms:issued/text()</xpath>
+      <xpath>//dcterms:issued/text()</xpath>
     </field>
     <field name="PublicationTimestamp">
       <xpath>if (matches(//dcterms:issued/text(), '[12]\d{3}.*')) then if(contains(//dcterms:issued/text(), '-')) then concat(substring-before(//dcterms:issued/text(), '-'),'-07-01T11:59:59Z') else concat(//dcterms:issued/text(),'-07-01T11:59:59Z') else '' </xpath>

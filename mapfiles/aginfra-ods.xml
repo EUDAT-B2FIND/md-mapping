@@ -29,7 +29,7 @@
     </field>
     <!-- All other visible fields, shown in table 'Additional info' -->
     <field name="PublicationYear">
-      <xpath>if (contains(//o:lifecycle/o:date/o:/dateTime/text(), '-')) then substring-before(//o:lifecycle/o:date/o:/dateTime/text(), '-') else //o:lifecycle/o:date/o:/dateTime/text()</xpath>
+      <xpath>//o:lifecycle/o:date/o:/dateTime/text()</xpath>
     </field>
     <field name="PublicationTimestamp">
       <xpath>if (contains(//o:lifecycle/o:date/o:/dateTime/text(), '-')) then concat(substring-before(//o:lifecycle/o:date/o:/dateTime/text(), '-'),'-07-01T11:59:59Z')  else concat(//o:lifecycle/o:date/o:/dateTime/text(),'-07-01T11:59:59Z') </xpath>

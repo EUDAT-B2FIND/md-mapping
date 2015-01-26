@@ -41,7 +41,7 @@
     </field>
     <!-- All other visible fields, shown in table 'Additional info' -->
     <field name="PublicationYear">
-      <xpath>if (contains(//marc:datafield[@tag = '264']/marc:subfield[@code = 'c']/text(), '-')) then substring-before(//marc:datafield[@tag = '264']/marc:subfield[@code = 'c']/text(), '-') else //marc:datafield[@tag = '264']/marc:subfield[@code = 'c']/text()</xpath>
+      <xpath>//marc:datafield[@tag = '264']/marc:subfield[@code = 'c']/text()</xpath>
     </field>
     <field name="PublicationTimestamp">
       <xpath>if (contains(//marc:datafield[@tag = '264']/marc:subfield[@code = 'c']/text(), '-')) then concat(substring-before(//marc:datafield[@tag = '264']/marc:subfield[@code = 'c']/text(), '-'),'-07-01T11:59:59Z') else concat(//marc:datafield[@tag = '264']/marc:subfield[@code = 'c']/text(),'-07-01T11:59:59Z')</xpath>

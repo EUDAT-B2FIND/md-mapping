@@ -62,8 +62,8 @@
     </field>
     <!-- All other visible fields, shown in table 'Additional info' -->
     <field name="PublicationYear">
-      <xpath>if (contains(//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text(), '-')) then substring-before(//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text(), '-') else //gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text()</xpath>
-      <xpath>if (contains(//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text(), '-')) then substring-before(//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text(), '-') else //gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text()</xpath>
+      <xpath>//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text()</xpath>
+      <xpath>//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text()</xpath>
     </field>
     <field name="PublicationTimestamp">
 <!--

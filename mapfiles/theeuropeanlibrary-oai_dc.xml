@@ -37,7 +37,7 @@
     </field>
     <!-- All other visible fields, shown in table 'Additional info' -->
     <field name="PublicationYear">
-      <xpath>if (contains(//dc:date[1]/text(), '-')) then substring-before(//dc:date[1]/text(), '-') else //dc:date[1]/text()</xpath>
+      <xpath>//dc:date[1]/text()</xpath>
     </field>
     <field name="PublicationTimestamp">
       <xpath>if (matches(//dc:date[1]/text(), '[12]\d{3}.*')) then if(contains(//dc:date[1]/text(), '-')) then concat(substring-before(//dc:date[1]/text(), '-'),'-07-01T11:59:59Z') else concat(//dc:date[1]/text(),'-07-01T11:59:59Z') else '' </xpath>

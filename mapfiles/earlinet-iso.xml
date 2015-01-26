@@ -63,7 +63,7 @@
     </field>
     <!-- All other visible fields, shown in table 'Additional info' -->
     <field name="PublicationYear">
-      <xpath>if (contains(//gmd:dateStamp/gco:DateTime/text(), '-')) then substring-before(//gmd:dateStamp/gco:DateTime/text(), '-') else //gmd:dateStamp/gco:DateTime/text()</xpath>
+      <xpath>//gmd:dateStamp/gco:DateTime/text()</xpath>
     </field>
     <field name="PublicationTimestamp">
       <xpath>if (contains(//gmd:dateStamp/gco:DateTime/text(), '-')) then concat(substring-before(//gmd:dateStamp/gco:DateTime/text(), '-'), '-07-01T11:59:59Z' ) else concat(//gmd:dateStamp/gco:DateTime/text(), '-07-01T11:59:59Z' ) </xpath>
