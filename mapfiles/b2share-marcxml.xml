@@ -14,7 +14,7 @@
       <xpath>//marc:datafield[@tag = '520']/marc:subfield[@code = 'a']/text()</xpath>
     </field>
     <field name="tags">
-      <xpath>distinct-values(replace(//marc:datafield[@tag = '653'][1]/marc:subfield[@code = 'a']/text(),"[\[;()/\]]"," "))</xpath>
+      <xpath>distinct-values(replace(//marc:datafield[@tag = '653'][1]/marc:subfield[@code = 'a']/text(),"[\[;:()/\]]"," "))</xpath>
     </field>
     <!-- Central facets, shown in an extra table 'Main fields' (not implemented yet : all fields in table 'Additional info') -->
     <field name="url">
