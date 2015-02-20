@@ -6,7 +6,7 @@
     <namespace ns="marc" uri="http://www.loc.gov/MARC21/slim"/>
   </namespaces>
   <mappings>
-    <!-- General fields shown above the field/value tables -->
+    <!-- General Information -->
     <field name="title">
       <xpath>//marc:datafield[@tag = '245']/marc:subfield[@code = 'a']/text()</xpath>
     </field>
@@ -16,35 +16,36 @@
     <field name="tags">
       <xpath>distinct-values(replace(//marc:datafield[@tag = '653'][1]/marc:subfield[@code = 'a']/text(),"[\[;:()/\]]"," "))</xpath>
     </field>
-    <!-- Data resource access -->
+    <!-- Access data -->
     <field name="url">
       <xpath>//marc:datafield[@tag = '856']/marc:subfield[@code = 'u']/text()</xpath>
     </field>
+<!--
     <field name="PID">
       <xpath>//marc:datafield[@tag = '024' and marc:subfield[@code='2']/text() = 'PID']/marc:subfield[@code = 'a']/text()</xpath>
     </field>
-    <field name="AlternateIdentifier">
+-->
+    <field name="identifiers">
 <!--
       <xpath>distinct-values(//marc:datafield[@tag = '856']/marc:subfield[@code = 'u']/text() | //marc:datafield[@tag = '024' and marc:subfield[@code='2']/text() = 'PID']/marc:subfield[@code = 'a']/text())</xpath>
 -->
       <xpath>string-join(//marc:datafield[@tag = '856']/marc:subfield[@code = 'u']/text() | //marc:datafield[@tag = '024' and marc:subfield[@code='2']/text() = 'PID']/marc:subfield[@code = 'a']/text(),";")</xpath>
    </field>
+   <field name="Checksum">
+      <xpath>//marc:datafield[@tag = '024' and marc:subfield[@code='2']/text() = 'checksum']/marc:subfield[@code = 'a']/text()</xpath>
+   </field>
    <field name="Rights">
       <xpath>//marc:datafield[@tag = '542']/marc:subfield[@code = 'l']/text()</xpath>
    </field>
-    <!-- Fields related to the provenance -->
+   <!-- Provenance data -->
    <field name="Discipline">
       <xpath>//marc:datafield[@tag = '980']/marc:subfield[@code = 'a']/text()</xpath>
-    </field>
-   <field name="B2SHARE-Domain">
-<!--
-      <xpath>//marc:datafield[@tag = '980']/marc:subfield[@code = 'a']/text()</xpath>
--->
-      <xpath>//r:header/r:setSpec/text()</xpath>
-    </field>
-    <field name="author">
+   </field>
+   <field name="author">
       <xpath>//marc:datafield[@tag = '100']/marc:subfield[@code = 'a']/text()</xpath>
       <xpath>//marc:datafield[@tag = '700']/marc:subfield/text()</xpath>
+      <xpath>//marc:datafield[@tag = '856']/marc:subfield[@code = 'f']/text()</xpath>
+      <xpath>//marc:datafield[@tag = '690' and marc:subfield[@code='a']/text() = 'principal_investigator']/marc:subfield[@code = 'b']/text()</xpath>
     </field>
     <field name="Publisher">
       <xpath>//marc:datafield[@tag = '260']/marc:subfield[@code = 'b']/text()</xpath>
@@ -55,20 +56,33 @@
     <field name="PublicationTimestamp">
       <xpath>if (contains(//marc:datafield[@tag = '264']/marc:subfield[@code = 'c']/text(), '-')) then concat(substring-before(//marc:datafield[@tag = '264']/marc:subfield[@code = 'c']/text(), '-'),'-07-01T11:59:59Z') else concat(//marc:datafield[@tag = '264']/marc:subfield[@code = 'c']/text(),'-07-01T11:59:59Z')</xpath>
     </field>
+    <field name="B2SHARE-Domain">
+<!--
+      <xpath>//marc:datafield[@tag = '980']/marc:subfield[@code = 'a']/text()</xpath>
+-->
+      <xpath>//r:header/r:setSpec/text()</xpath>
+    </field>
+    <!-- Formal data -->
     <field name="Language">
       <xpath>//marc:datafield[@tag = '546']/marc:subfield[@code = 'a']/text()</xpath>
     </field>
 <!-- N/A !!
+    <field name="TemporalCoverage">
+      <string>N/A</string>
+    </field>
+    <field name="SpatialCoverage">
+      <string>N/A</string>
+    </field>
     <field name="Format">
       <string></string>
     </field>
 -->
-    <field name="Checksum">
-      <xpath>//marc:datafield[@tag = '024' and marc:subfield[@code='2']/text() = 'checksum']/marc:subfield[@code = 'a']/text()</xpath>
+    <!-- Additional Information -->
+<!-- N/A !!
+    <field name="Contact">
+      <string>N/A</string>
     </field>
-    <!-- Fields describing coverage and other 'continental' properties -->
-<!--
-    <field name="GeograhicDescription">
+    <field name="MetadataAccess">
       <string>N/A</string>
     </field>
 -->
@@ -158,9 +172,6 @@
     </field>
     <field name="oai_identifier">
       <xpath>//r:header/r:identifier/text()</xpath>
-    </field>
-    <field name="oai_set">
-      <xpath>//r:header/r:setSpec/text()</xpath>
     </field>
     <field name="MapperVersion">
       <string expand="true">${mapper_version}</string>
