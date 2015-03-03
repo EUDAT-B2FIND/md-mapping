@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <mapping-table>
-  <!-- Mappings for q???- DublinCore metadata from PanData. -->
+  <!-- Mappings for q??? - DublinCore (qdc not dc??) metadata from PanData. -->
   <namespaces>
     <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
     <namespace ns="qdc" uri="http://pandata.org/pmh/oai_qdc/"/>
@@ -20,9 +20,11 @@
       <xpath>distinct-values(replace(//dc:relation[1]/text(),"[\[;()/\]]"," "))</xpath>
     </field>
     <!-- Access data  -->
+    <!--
     <field name="url">
       <xpath>//dcterms:references/text()</xpath>
     </field>
+    -->
     <field name="identifiers">
       <xpath>string-join(//dc:identifier/text() | //dcterms:references/text() | //dc:source/text() ,";")</xpath>
       <!--
@@ -47,11 +49,16 @@
       <xpath>//dc:publisher/text()</xpath>
     </field>
     <field name="PublicationYear">
+      <xpath>//dcterms:issued/text()</xpath>
+    </field>
+<!--
+    <field name="PublicationYear">
       <xpath>if (contains(//dcterms:issued/text(), '-')) then substring-before(//dcterms:issued/text(), '-') else //dcterms:issued/text()</xpath>
     </field>
     <field name="PublicationTimestamp">
       <xpath>if (matches(//dcterms:issued/text(), '[12]\d{3}.*')) then if(contains(//dcterms:issued/text(), '-')) then concat(substring-before(//dcterms:issued/text(), '-'),'-07-01T11:59:59Z') else concat(//dcterms:issued/text(),'-07-01T11:59:59Z') else '' </xpath>
     </field>
+-->
     <!-- Formal data -->
     <field name="Language">
       <xpath>//dc:language/text()</xpath>
