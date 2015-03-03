@@ -45,9 +45,11 @@
     <field name="PublicationYear">
       <xpath>//marc:datafield[@tag = '264']/marc:subfield[@code = 'c']/text()</xpath>
     </field>
+<!-- remove : is derivated for PublicationYear !!??
     <field name="PublicationTimestamp">
       <xpath>if (contains(//marc:datafield[@tag = '264']/marc:subfield[@code = 'c']/text(), '-')) then concat(substring-before(//marc:datafield[@tag = '264']/marc:subfield[@code = 'c']/text(), '-'),'-07-01T11:59:59Z') else concat(//marc:datafield[@tag = '264']/marc:subfield[@code = 'c']/text(),'-07-01T11:59:59Z')</xpath>
     </field>
+-->
     <field name="B2SHARE-Domain">
 <!--
       <xpath>//marc:datafield[@tag = '980']/marc:subfield[@code = 'a']/text()</xpath>
