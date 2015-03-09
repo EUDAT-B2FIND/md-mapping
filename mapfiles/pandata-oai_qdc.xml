@@ -63,11 +63,11 @@
     <field name="Language">
       <xpath>//dc:language/text()</xpath>
     </field>
-    <field name="TemporalCoverage">
-      <xpath>//dcterms:temporal/text()</xpath>
-    </field>
     <field name="SpatialCoverage">
       <xpath>//dc:relation[@xsi:type="dcterms:ISO3166"]/text()</xpath>
+    </field>
+    <field name="TemporalCoverage">
+      <xpath>//dcterms:temporal/text()</xpath>
     </field>
      <field name="Format">
       <xpath>//dc:format[not(contains(text(), 'Bytes'))]</xpath>

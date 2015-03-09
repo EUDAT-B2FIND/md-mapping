@@ -5,11 +5,17 @@
 <!-- ??? works not with DDI namespace ???
     <namespace ns="d" uri="http://www.icpsr.umich.edu/DDI"/>
 -->
+
+<!--
+    <field name="MetadataSchema">
+        <string>http://www.icpsr.umich.edu/DDI/Version1-2-2.xsd</string>
+    </field>
+-->
     <namespace ns="d" uri="http://www.openarchives.org/OAI/2.0/"/>
     <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
   </namespaces>
   <mappings>
-   <!-- General fields shown above the field/value tables -->
+   <!-- General information -->
    <field name="title">
       <xpath>//d:codeBook/d:stdyDscr/d:citation/d:titlStmt/d:titl/text()</xpath>
       <xpath>//d:codeBook/d:docDscr/d:citation/d:titlStmt/d:titl/text()</xpath>
@@ -20,17 +26,28 @@
        <xpath>//d:codeBook/d:stdyDscr/d:dataAccs/d:useStmt/d:citReq/text()</xpath>
    </field>
     <field name="tags">
-       <xpath>string-join(distinct-values(replace(//d:codeBook/d:stdyDscr/d:stdyInfo/d:subject/d:keyword/text(),"[\[;()/\]]"," ") | replace(//d:codeBook//d:stdyDscr//d:stdyInfo//d:subject//d:topcClas/text(),"[\[;()/\]]"," ") ), '; ')</xpath>
+       <xpath>string-join(//d:codeBook/d:stdyDscr/d:stdyInfo/d:subject/d:keyword/text() | //d:codeBook//d:stdyDscr//d:stdyInfo//d:subject//d:topcClas/text() ,";")</xpath>
    </field>
-   <field name="url">
-       <xpath>//d:codeBook/d:stdyDscr/d:dataAccs/d:setAvail/d:accsPlac/@URI</xpath>
-   </field>
-   <field name="Discipline">
-        <!-- ??? or map all to Social sciences' ?? -->
-        <xpath>//d:codeBook/d:stdyInfo/d:subject/d:topClass/text()</xpath>
-   </field>
-    <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
+   <!-- Access data  -->
+   <field name="identifiers">
+       <xpath>string-join(//d:codeBook/d:stdyDscr/d:dataAccs/d:setAvail/d:accsPlac/@URI | //d:codeBook/d:stdyDscr/d:citation/d:titlStmt/d:IDNo/text() | /d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:othId[@type="DOI"]/text(), '; ')  </xpath>
+    </field>
 
+   <field name="Checksum">
+   </field>
+   <field name="Rights">
+       <xpath>/d:codeBook/d:stdyInfo/d:citation/d:prodStmt/d:copyright/text()</xpath>
+       <xpath>/d:codeBook/d:stdyDscr/d:citation/d:prodStmt/d:copyright/text()</xpath>
+       <xpath>/d:codeBook/d:stdyDscr/d:dataAccs/d:setAvail/d:avlStatus/text()</xpath>
+   </field>
+   <!-- Provenance data -->
+   <field name="Discipline">
+        <!-- map all to 'Social sciences' ?? -->
+        <string>Social sciences</string>
+        <!--
+        <xpath>//d:codeBook/d:stdyInfo/d:subject/d:topClass/text()</xpath>
+        -->
+   </field>
    <field name="author">
    <!-- Concatenate attribute value of att "affiliation" to value of "Authoring Entity/Primary Investigator" element if applicable. -->
       <xpath>//d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:AuthEnty/text()</xpath>
@@ -42,52 +59,30 @@
       <xpath>/d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:othId/text()</xpath>
 -->
    </field>
-   <field name="Language">
-       <!-- No good filed to map language to in DDI 1.2.2 so we just grab the first xml:lang attribute -->
-       <xpath>/d:codeBook/@xml:lang</xpath>
-       <xpath>/d:codeBook/@xml-lang</xpath>
-   </field>
+    <field name="Publisher">
+       <xpath>//d:codeBook/d:docDscr/d:citation/d:prodStmt/d:producer/@affiliation</xpath>
+       <xpath>//d:codeBook/d:stdyDscr/d:citation/d:prodStmt/d:producer/@affiliation</xpath>
+        <xpath>string-join(distinct-values(//d:codeBook/d:stdyInfo/d:citation/d:prodStmt/d:producer/text()), '; ')</xpath>
+    </field>
    <!-- The date field is unstructured. A date unifying function will be implemented later. -->
    <field name="PublicationYear">
         <xpath>//d:codeBook/d:docDscr/d:citation/d:prodStmt/d:distDate/text()</xpath>
         <xpath>//d:codeBook/d:docDscr/d:citation/d:prodStmt/d:prodDate/@date</xpath>
         <xpath>//d:codeBook/d:docDscr/d:citation/d:prodStmt/d:prodDate/text()</xpath>
    </field>
-   <field name="PublicationTimestamp">
-        <xpath>//d:codeBook/d:docDscr/d:citation/d:prodStmt/d:prodDate/@date</xpath>
-        <xpath>//d:codeBook/d:docDscr/d:citation/d:prodStmt/d:prodDate/text()</xpath>
+    <!-- Formal data -->
+   <field name="Language">
+       <!-- No good filed to map language to in DDI 1.2.2 so we just grab the first xml:lang attribute -->
+       <xpath>/d:codeBook/@xml:lang</xpath>
+       <xpath>/d:codeBook/@xml-lang</xpath>
    </field>
-   <field name="format">
-        <xpath>//d:codeBook/d:fileDscr/d:fileType/text()</xpath>
+   <field name="SpatialCoverage">
+        <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:geogCover/d:txt/text()</xpath>
    </field>
-   <field name="Country">
-        <xpath>string-join(distinct-values(//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:nation/text()), '; ')</xpath>
-   </field>
-   <field name="PID">
-       <xpath>//d:codeBook/d:stdyDscr/d:citation/d:titlStmt/d:IDNo/text()</xpath>
-       <xpath>string-join(distinct-values(/d:codeBook/d:stdyDscr/d:citation/d:titlStmt/d:IDNo/text()), '; ')  </xpath>
-       <xpath>/d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:othId[@type="DOI"]/text()</xpath>
+   <field name="TemporalCoverage">
+       <xpath>string-join(//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:timePrd[@event="start"]/@date | //d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:timePrd[@event="end"]/@date, ';')</xpath>
     </field>
- <!--
-    <field name="MetadataSource">
-        <string expand="true">${filename}</string>
-    </field>
- -->
-    <field name="fulltext">
-       <xpath>normalize-space(string(/))</xpath>
-    </field>
-    <field name="Rights">
-       <xpath>/d:codeBook/d:stdyInfo/d:citation/d:prodStmt/d:copyright/text()</xpath>
-       <xpath>/d:codeBook/d:stdyDscr/d:citation/d:prodStmt/d:copyright/text()</xpath>
-       <xpath>/d:codeBook/d:stdyDscr/d:dataAccs/d:setAvail/d:avlStatus/text()</xpath>
-    </field>
-    <field name="ResourceType">
-       <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:dataKind/text()</xpath>
-    </field>
-    <field name="SpatialCoverage">
-       <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:geogCover/d:txt/text()</xpath>
-       <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:geogCover/text()</xpath>
-    </field>
+<!--
    <field name="TemporalCoverage:BeginDate">
        <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:timePrd[@event="start"]/@date</xpath>
     </field>
@@ -100,23 +95,26 @@
     <field name="TempCoverageEnd">
        <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:timePrd[@event="end"]/@date</xpath>
     </field>
-    <field name="Origin">
-        <xpath>//d:codeBook/d:stdyDscr/d:citation/d:prodStmt/d:producer/@d:affiliation</xpath>
-        <xpath>string-join(distinct-values(//d:codeBook/d:stdyInfo/d:citation/d:prodStmt/d:producer/text()), '; ')</xpath>
-    </field>
-<!--
-    <field name="MetadataSchema">
-        <string>http://www.icpsr.umich.edu/DDI/Version1-2-2.xsd</string>
-    </field>
 -->
-    <field name="oai_identifier">
-      <xpath>//r:header/r:identifier/text()</xpath>
+   <field name="Format">
+        <xpath>//d:codeBook/d:fileDscr/d:fileType/text()</xpath>
+   </field>
+    <!-- Hidden fields, only shown to logged in CKAN users -->
+    <field name="fulltext">
+       <xpath>normalize-space(string(/))</xpath>
     </field>
     <field name="oai_set">
       <xpath>//r:header/r:setSpec/text()</xpath>
     </field>
+    <field name="oai_identifier">
+      <xpath>//r:header/r:identifier/text()</xpath>
+    </field>
     <field name="MapperVersion">
       <string expand="true">${mapper_version}</string>
+    </field>
+    <!-- CESSDA specific fields -->
+    <field name="ResourceType">
+       <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:dataKind/text()</xpath>
     </field>
   </mappings>
 </mapping-table>
