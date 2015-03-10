@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <mapping-table>
-  <!-- Mappings for DDI metadata version 1.2.2. - adapted to B2FIND -->
+  <!-- Mappings for DDI metadata version 1.2.2.?? from CESSDA - adapted to B2FIND -->
   <namespaces>
 <!-- ??? works not with DDI namespace ???
     <namespace ns="d" uri="http://www.icpsr.umich.edu/DDI"/>
@@ -32,7 +32,6 @@
    <field name="identifiers">
        <xpath>string-join(//d:codeBook/d:stdyDscr/d:dataAccs/d:setAvail/d:accsPlac/@URI | //d:codeBook/d:stdyDscr/d:citation/d:titlStmt/d:IDNo/text() | /d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:othId[@type="DOI"]/text(), '; ')  </xpath>
     </field>
-
    <field name="Checksum">
    </field>
    <field name="Rights">
