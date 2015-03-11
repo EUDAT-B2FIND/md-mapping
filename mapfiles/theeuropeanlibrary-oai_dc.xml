@@ -14,19 +14,19 @@
       <xpath>//dc:title/text()</xpath>
     </field>
     <field name="notes">
-      <xpath>//dc:description</xpath>
+      <xpath>string-join(distinct-values(//dc:description), '; ')</xpath>
     </field>
     <field name="tags">
       <xpath>replace(replace(//dc:type[1]/text(),"info:",""),"[()/]"," ")</xpath>
     </field>
     <!-- Access data  -->
     <field name="identifiers">
-       <xpath>string-join(//dc:identifier/text() | //dc:identifier[1]/text(), '; ')  </xpath>
+       <xpath>string-join(distinct-values(//dc:identifier/text()), '; ')</xpath>
     </field>
    <field name="Checksum">
    </field>
    <field name="Rights">
-      <xpath>//dc:rights/text()</xpath>
+      <xpath>string-join(distinct-values(//dc:rights/text()), '; ')</xpath>
    </field>
    <!-- Provenance data -->
     <field name="Discipline">
@@ -39,28 +39,26 @@
 -->
     </field>
     <field name="Publisher">
-      <xpath>//dc:source/text()</xpath>
+      <xpath>string-join(distinct-values(//dc:source/text()), '; ')</xpath>
 <!--
       <xpath>//dc:publisher/text()</xpath>
 -->
     </field>
     <!-- All other visible fields, shown in table 'Additional info' -->
     <field name="PublicationYear">
-      <xpath>//dc:date[1]/text()</xpath>
+      <xpath>//dc:date/text()</xpath>
     </field>
-<!--
-    <field name="PublicationTimestamp">
-      <xpath>if (matches(//dc:date[1]/text(), '[12]\d{3}.*')) then if(contains(//dc:date[1]/text(), '-')) then concat(substring-before(//dc:date[1]/text(), '-'),'-07-01T11:59:59Z') else concat(//dc:date[1]/text(),'-07-01T11:59:59Z') else '' </xpath>
-    </field>
--->
+    <!-- Formal data -->
     <field name="Language">
       <xpath>//dc:language/text()</xpath>
     </field>
-    <field name="Format">
-      <xpath>//dc:format[not(contains(text(), 'Bytes'))]</xpath>
-    </field>
-    <field name="GeograhicDescription">
+    <field name="SpatialCoverage">
       <xpath>//dc:coverage/text()</xpath>
+    </field>
+    <field name="TemporalCoverage">
+    </field>
+    <field name="Format">
+      <xpath>//dc:type[not(contains(text(), 'Bytes'))]</xpath>
     </field>
     <!-- Hidden fields, only shown to logged in CKAN users -->
     <field name="fulltext">
