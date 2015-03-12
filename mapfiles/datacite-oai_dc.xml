@@ -11,7 +11,7 @@
       <xpath>//dc:title/text()</xpath>
     </field>
     <field name="notes">
-      <xpath>string-join(distinct-values(//dc:description/text()), ' | ')</xpath>
+      <xpath>string-join(distinct-values(//dc:description/text()), '\n')</xpath>
     </field>
     <field name="tags">
       <xpath>//dc:type/text()</xpath>
@@ -45,7 +45,7 @@
     <field name="Format">
       <xpath>//dc:format[not(contains(text(), 'Bytes'))]</xpath>
     </field>
-    <field name="GeograhicDescription">
+    <field name="SpatialCoverage">
       <xpath>//dc:coverage/text()</xpath>
     </field>
     <field name="Rights">
