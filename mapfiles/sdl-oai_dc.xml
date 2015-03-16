@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <mapping-table>
-  <!-- Mappings for DublinCore metadata from DataCite. -->
+  <!-- Mappings for DublinCore metadata from SDL. -->
   <namespaces>
     <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
     <namespace ns="dc" uri="http://purl.org/dc/elements/1.1/"/>
   </namespaces>
   <mappings>
-    <!-- General fields shown above the field/value tables -->
+   <!-- General information -->
     <field name="title">
       <xpath>//dc:title/text()</xpath>
     </field>
@@ -16,25 +16,16 @@
     <field name="tags">
       <xpath>replace(replace(//dc:type[1]/text(),"info:",""),"[()/]"," ")</xpath>
     </field>
-    <!-- Central facets, shown in an extra table 'Main fields' (not implemented yet : all fields in table 'Additional info') -->
-    <field name="url">
-      <!--
-      <xpath>if (contains (string-join(distinct-values(//dc:identifier/text()),' ; '),'doi:')) then concat('http://dx.doi.org/',substring-before(substring-after(string-join(distinct-values(//dc:identifier/text()),' ; '), 'doi:'),' ; ')) else //dc:identifier/text()</xpath> -->
-<!--
-      <xpath>string-join(distinct-values(//dc:identifier/text()), '; ')</xpath>
--->
-<!--
-      <xpath>
-      for $i in (distinct-values(//dc:identifier/text()),' ; ')
-         return if (contains ($i,'http://')) then concat('http://',substring-after($i,'http://')) 
-      </xpath>
--->
-      <xpath>if (contains (string-join(distinct-values(//dc:identifier/text()),';'),'http://')) then substring-before(concat('http://',substring-after(string-join(distinct-values(//dc:identifier/text()),';'),'http://')),';') else //dc:identifier/text()</xpath>
-
-<!--
-      <xpath>if (contains(//dc:source/text(),     '[doi:')) then concat('http://dx.doi.org/',substring-before(substring-after(//dc:source/text(), '[doi: '), ']')) else //dc:source/text()</xpath>
--->
+    <!-- Access data  -->
+    <field name="identifiers">
+      <xpath>string-join(distinct-values(//dc:identifier/text()),';')</xpath>
+   </field>
+   <field name="Checksum">
+   </field>
+    <field name="Rights">
+      <xpath>//dc:rights/text()</xpath>
     </field>
+   <!-- Provenance data -->
     <field name="Discipline">
       <xpath><string>"Library and museum studies"</string></xpath>
 <!--      <xpath>//dc:subject/text()</xpath>  -->
@@ -42,28 +33,27 @@
     <field name="author">
       <xpath>string-join(distinct-values(//dc:creator/text()), '; ')</xpath>
     </field>
-    <!-- All other visible fields, shown in table 'Additional info' -->
+    <field name="Publisher">
+      <xpath>//dc:source[1]/text()</xpath>
+      <xpath>//dc:publisher/text()</xpath>
+    </field>
     <field name="PublicationYear">
       <xpath>//dc:date[1]/text()</xpath>
     </field>
     <field name="PublicationTimestamp">
       <xpath>if (matches(//dc:date[1]/text(), '[12]\d{3}.*')) then if(contains(//dc:date[1]/text(), '-')) then concat(substring-before(//dc:date[1]/text(), '-'),'-07-01T11:59:59Z') else concat(//dc:date[1]/text(),'-07-01T11:59:59Z') else '' </xpath>
     </field>
+    <!-- Formal data -->
     <field name="Language">
       <xpath>//dc:language/text()</xpath>
     </field>
-    <field name="Origin">
-      <xpath>//dc:source[1]/text()</xpath>
-      <xpath>//dc:publisher/text()</xpath>
+    <field name="SpatialCoverage">
+      <xpath>//dc:coverage/text()</xpath>
+    </field>
+    <field name="TemporalCoverage">
     </field>
     <field name="Format">
       <xpath>//dc:format[not(contains(text(), 'Bytes'))]</xpath>
-    </field>
-    <field name="GeograhicDescription">
-      <xpath>//dc:coverage/text()</xpath>
-    </field>
-    <field name="Rights">
-      <xpath>//dc:rights/text()</xpath>
     </field>
     <!-- Hidden fields, only shown to logged in CKAN users -->
     <field name="fulltext">
@@ -71,6 +61,9 @@
     </field>
     <field name="oai_identifier">
       <xpath>//r:header/r:identifier/text()</xpath>
+    </field>
+    <field name="oai_set">
+      <xpath>//r:header/r:setSpec/text()</xpath>
     </field>
     <field name="MapperVersion">
       <string expand="true">${mapper_version}</string>
