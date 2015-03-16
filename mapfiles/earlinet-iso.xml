@@ -42,7 +42,7 @@
 -->
     </field>
     <field name="author">
-      <xpath>string-join(distinct-values(//gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty[gmd:role/gmd:CI_RoleCode/@codeListValue = 'author' or gmd:role/gmd:CI_RoleCode/@codeListValue = 'originator']/gmd:individualName/gco:CharacterString[not(text()='not filled')]/text() | //gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString[not(text()='not filled')]/text()), ' ;')</xpath>
+      <xpath>string-join(distinct-values(//gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty[gmd:role/gmd:CI_RoleCode/@codeListValue = 'author' or gmd:role/gmd:CI_RoleCode/@codeListValue = 'originator']/gmd:individualName/gco:CharacterString[not(text()='not filled')]/text() | //gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString[not(text()='not filled')]/text()), '; ')</xpath>
     </field>
     <field name="Publisher">
       <xpath>//gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString/text()</xpath>

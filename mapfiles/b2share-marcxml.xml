@@ -21,7 +21,7 @@
       <xpath>//marc:datafield[@tag = '856']/marc:subfield[@code = 'u']/text()</xpath>
     </field>
     <field name="identifiers">
-      <xpath>string-join(//marc:datafield[@tag = '856']/marc:subfield[@code = 'u']/text() | //marc:datafield[@tag = '024' and marc:subfield[@code='2']/text() = 'PID']/marc:subfield[@code = 'a']/text(),";")</xpath>
+      <xpath>string-join(//marc:datafield[@tag = '856']/marc:subfield[@code = 'u']/text() | //marc:datafield[@tag = '024']/marc:subfield[@code = 'a']/text() | //marc:datafield[@tag = '690']/marc:subfield[@code = 'b']/text() ,";")</xpath>
    </field>
    <field name="Checksum">
       <xpath>//marc:datafield[@tag = '024' and marc:subfield[@code='2']/text() = 'checksum']/marc:subfield[@code = 'a']/text()</xpath>
@@ -31,9 +31,11 @@
    </field>
    <!-- Provenance data -->
    <field name="Discipline">
+      <xpath>//marc:datafield[@tag = '526']/marc:subfield[@code = 'a']/text()</xpath>
       <xpath>//marc:datafield[@tag = '980']/marc:subfield[@code = 'a']/text()</xpath>
    </field>
    <field name="author">
+      <xpath>//marc:datafield[@tag = '690' and marc:subfield[@code='a']/text() = 'collector_name']/marc:subfield[@code = 'b']/text()</xpath>
       <xpath>//marc:datafield[@tag = '100']/marc:subfield[@code = 'a']/text()</xpath>
       <xpath>//marc:datafield[@tag = '700']/marc:subfield/text()</xpath>
       <xpath>//marc:datafield[@tag = '856']/marc:subfield[@code = 'f']/text()</xpath>
@@ -156,6 +158,13 @@
     </field>
    <field name="Material Type">
       <xpath>//marc:datafield[@tag = '690'][marc:subfield[@code = 'a']/text()="material_type"]/marc:subfield[@code = 'b']/text()</xpath>
+    </field>
+    <!-- NRM specific -->
+    <field name="TemporalCoverage">
+      <xpath>string-join(distinct-values(//marc:datafield[@tag = '690' and marc:subfield[@code='a']/text() = 'starttime']/marc:subfield[@code = 'b']/text() | //marc:datafield[@tag = '690' and marc:subfield[@code='a']/text() = 'endtime']/marc:subfield[@code = 'b']/text()),';')</xpath>
+    </field>
+    <field name="SpatialCoverage">
+      <xpath>string-join(distinct-values(//marc:datafield[@tag = '690' and marc:subfield[@code='a']/text() = 'locality']/marc:subfield[@code = 'b']/text() | //marc:datafield[@tag = '690' and marc:subfield[@code='a']/text() = 'longitude']/marc:subfield[@code = 'b']/text() | //marc:datafield[@tag = '690' and marc:subfield[@code='a']/text() = 'latitude']/marc:subfield[@code = 'b']/text()),';')</xpath>
     </field>
     <!-- Hidden fields, only shown to logged in CKAN users -->
     <field name="fulltext">

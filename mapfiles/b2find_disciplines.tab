@@ -1,4 +1,4 @@
-#Id	SuperClass	RefName
+#Id	Super Class	Ref Name
 1	Humanities	Humanities
 1.1	Humanities	Human History
 1.1.1	Human History	African History
@@ -105,15 +105,15 @@
 1.4.3.2	Dance	Dance notation
 1.4.3.3	Dance	Ethnochoreology
 1.4.3.4	Dance	History of dance
-1.4.4	Arts	Theatre
-1.4.4.1	Theatre	History of theater|History
-1.4.4.2	Theatre	Acting
-1.4.4.3	Theatre	Theatre director|Directing
-1.4.4.4	Theatre	Scenic design|Stage design
-1.4.4.5	Theatre	Dramaturgy
-1.4.4.6	Theatre	Playwrighting
-1.4.4.7	Theatre	Scenography
-1.4.4.8	Theatre	Musical theatre
+1.4.4	Arts	Theater
+1.4.4.1	Theater	History of theater|History
+1.4.4.2	Theater	Acting
+1.4.4.3	Theater	Theater director|Directing
+1.4.4.4	Theater	Scenic design|Stage design
+1.4.4.5	Theater	Dramaturgy
+1.4.4.6	Theater	Playwrighting
+1.4.4.7	Theater	Scenography
+1.4.4.8	Theater	Musical Theater
 1.4.5	Arts	Film studies|Film
 1.4.5.1	Film studies|Film	Animation
 1.4.5.2	Film studies|Film	Live-action
