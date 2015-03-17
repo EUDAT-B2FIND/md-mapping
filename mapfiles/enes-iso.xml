@@ -63,7 +63,7 @@
       <xpath>string-join(distinct-values(//gmd:MD_Metadata/gmd:locale/gmd:PT_Locale/gmd:languageCode/gmd:LanguageCode/text()), ';')</xpath>
     </field>
     <field name="SpatialCoverage">
-      <xpath>concat(//gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:westBoundLongitude/gco:Decimal/text(), ';', //gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:southBoundLatitude/gco:Decimal/text(), ';', //gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:eastBoundLongitude/gco:Decimal/text(), ';', //gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:northBoundLatitude/gco:Decimal/text())</xpath>
+      <xpath>concat(//gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:southBoundLatitude/gco:Decimal/text(), ';', //gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:westBoundLongitude/gco:Decimal/text(), ';', //gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:northBoundLatitude/gco:Decimal/text(), ';', //gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:eastBoundLongitude/gco:Decimal/text())</xpath>
     </field>
 <!--
     <field name="spatial">
@@ -71,7 +71,7 @@
     </field>
 -->
    <field name="TemporalCoverage">
-      <xpath>concat(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text(),';',//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text())</xpath>
+      <xpath>concat(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text(),';',//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition/text())</xpath>
     </field>
     <field name="Format">
       <xpath>//gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceFormat/gmd:MD_Format/gmd:version/gco:CharacterString/text()</xpath>
