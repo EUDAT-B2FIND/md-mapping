@@ -54,12 +54,6 @@
       <xpath>//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text()</xpath>
       <xpath>//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text()</xpath>
     </field>
-    <field name="PublicationTimestamp">
-<!--
-      <xpath>if (contains(//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text(), '-')) then concat(substring-before(//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text(), '-'), '-07-01T11:59:59Z' ) else concat(//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text(), '-07-01T11:59:59Z' )</xpath>
--->
-      <xpath>if (contains(//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text(), '-')) then concat(substring-before(//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text(), '-'), '-07-01T11:59:59Z' ) else concat(//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text(), '-07-01T11:59:59Z' ) </xpath>
-    </field>
     <!-- Formal data -->
     <field name="Language">
       <!-- Note: this is the language CODE. -->
