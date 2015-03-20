@@ -40,11 +40,6 @@
     <field name="PublicationYear">
       <xpath>//dc:date[1]/text()</xpath>
     </field>
-<!--
-    <field name="PublicationTimestamp">
-      <xpath>if (matches(//dc:date[1]/text(), '[12]\d{3}.*')) then if(contains(//dc:date[1]/text(), '-')) then concat(substring-before(//dc:date[1]/text(), '-'),'-07-01T11:59:59Z') else concat(//dc:date[1]/text(),'-07-01T11:59:59Z') else '' </xpath>
-    </field>
--->
     <!-- Formal data -->
     <field name="Language">
       <xpath>//dc:language/text()</xpath>
