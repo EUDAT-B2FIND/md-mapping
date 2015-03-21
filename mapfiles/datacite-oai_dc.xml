@@ -39,17 +39,9 @@
     <field name="PublicationYear">
       <xpath>//dc:date/text()</xpath>
     </field>
-<!--
-    <field name="PublicationTimestamp">
-      <xpath>if (contains(//dc:date[1]/text(), '-')) then concat(substring-before(//dc:date[1]/text(), '-'),'-07-01T11:59:59Z') else concat(//dc:date[1]/text(),'-07-01T11:59:59Z') </xpath>
--->
-    <!-- Formal data -->
-    </field>
+    <!-- Formal data -->    
     <field name="Language">
       <xpath>//dc:language/text()</xpath>
-    </field>
-    <field name="SpatialCoverage">
-      <xpath>//dc:coverage/text()</xpath>
     </field>
     <field name="SpatialCoverage">
       <xpath>//dc:coverage/text()</xpath>
