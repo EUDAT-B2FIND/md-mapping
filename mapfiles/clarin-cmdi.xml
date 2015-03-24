@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <mapping-table>
-  <!-- Mappings for CMDIfied IMDI profile of CLARIN metadata. -->
+  <!-- Mappings for CMDIfied IMDI metadata of CLARIN -->
   <namespaces>
     <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
     <namespace ns="cmd" uri="http://www.clarin.eu/cmd/"/>
     <namespace ns="r" uri="http://www.openarchives.org/OAI/2.0/"/>
   </namespaces>
   <mappings>
-   <!-- General fields shown above the field/value tables -->
+   <!-- General inormation -->
     <field name="title">
       <xpath>//cmd:CMD/cmd:Components/cmd:Session/cmd:Title/text()</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:Session/cmd:Name/text()</xpath>
@@ -32,15 +32,23 @@
       <xpath>//cmd:Project/cmd:descriptions/cmd:Description/text()</xpath>
     </field>
     <field name="tags">
-      <xpath>substring(replace(//cmd:CMD/cmd:Header/cmd:MdCollectionDisplayName/text(),"[:()]","-"),0,50)</xpath>
+      <xpath>replace(//cmd:CMD/cmd:Components/cmd:Session/cmd:MDGroup/cmd:Content/cmd:Keys/cmd:Key[@Name = 'CGN.textClass.keywords']/text(),"[:()]",";")</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:Song/cmd:Keywords/cmd:Keyword/text()</xpath>
     </field>
-    <!-- Central facets, shown in an extra table 'Main fields' (not implemented yet : all fields in table 'Additional info') -->
-    <field name="url">
+    <!-- Access data  -->
+    <field name="identifiers">
+      <xpath>//cmd:CMD/cmd:Header/cmd:MdSelfLink/text()</xpath>
+<!--
       <xpath>if (contains(//cmd:CMD/cmd:Header/cmd:MdSelfLink/text(), 'http://') or contains(//cmd:CMD/cmd:Header/cmd:MdSelfLink/text(), 'https://')) then //cmd:CMD/cmd:Header/cmd:MdSelfLink/text() else ''</xpath>
       <xpath>if (contains(//cmd:CMD/cmd:Header/cmd:MdSelfLink/text(), 'hdl:')) then concat('http://hdl.handle.net/',replace(substring-after(//cmd:CMD/cmd:Header/cmd:MdSelfLink/text(), 'hdl:'),'@format=cmdi',''),'@view') else ''</xpath>
       <xpath>concat('http://hdl.handle.net/', replace(//cmd:CMD/cmd:Header/cmd:MdSelfLink/text(),'@format=cmdi',''),'@view')</xpath>
+-->
     </field> 
+    <field name="Checksum">
+    </field>
+    <field name="Rights">
+    </field>
+   <!-- Provenance data -->
     <field name="Discipline">
 <!--
       <xpath>if (normalize-space(string(//cmd:CMD/cmd:Components/cmd:Session/cmd:MDGroup/cmd:Content/cmd:Genre/text())) = '') then '' else concat('Linguistics - ', string(//cmd:CMD/cmd:Components/cmd:Session/cmd:MDGroup/cmd:Content/cmd:Genre/text()))</xpath>
@@ -55,25 +63,23 @@
       <xpath>//cmd:CMD/cmd:Components/cmd:Song/cmd:Authors/cmd:Author/cmd:Name/cmd:Original/text()</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:SongScan/cmd:Authors/cmd:Author/cmd:Name/cmd:Original/text()</xpath>
     </field>
-    <!-- All other visible fields, shown in table 'Additional info' -->
-    <!-- The date field is unstructured. Heuristically, take the first
-    group of 4 digits we see. This will work for both dd-mm-yyyy and
-    yyyy-mm-dd. -->
+    <field name="Publisher">
+      <xpath>//cmd:CMD/cmd:Header/cmd:MdCollectionDisplayName/text()</xpath>
+    </field>
     <field name="PublicationYear">
       <xpath>if (matches(//cmd:CMD/cmd:Components/cmd:Session/cmd:Date/text(), '[12]\d{3}')) then replace(//cmd:CMD/cmd:Components/cmd:Session/cmd:Date/text(), '.*([12]\d{3}).*', '$1') else ''</xpath>
       <xpath>if (matches(//cmd:CMD/cmd:Header/cmd:MdCreationDate/text(), '[12]\d{3}')) then replace(//cmd:CMD/cmd:Header/cmd:MdCreationDate/text(), '.*([12]\d{3}).*', '$1') else ''</xpath>
     </field>
-    <field name="PublicationTimestamp">
-      <xpath>if (matches(//cmd:CMD/cmd:Components/cmd:Session/cmd:Date/text(), '[12]\d{3}')) then concat(replace(//cmd:CMD/cmd:Components/cmd:Session/cmd:Date/text(), '.*([12]\d{3}).*', '$1'),'-07-01T11:59:59Z') else ''</xpath>
-      <xpath>if (matches(//cmd:CMD/cmd:Header/cmd:MdCreationDate/text(), '[12]\d{3}')) then concat(replace(//cmd:CMD/cmd:Header/cmd:MdCreationDate/text(), '.*([12]\d{3}).*', '$1'),'-07-01T11:59:59Z') else ''</xpath>
-    </field>
+    <!-- Formal data -->
     <field name="Language">
+      <xpath>//cmd:CMD/cmd:Components/cmd:Session/cmd:MDGroup/cmd:Content/cmd:Content_Languages/cmd:Content_Language/cmd:Name/text()</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:Session/cmd:MDGroup/cmd:Content/cmd:Content_Languages/cmd:Content_Language/cmd:Id/text()</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:Song/cmd:Language/cmd:LanguageName/text()</xpath>
       <xpath>//cmd:CMD/cmd:Components/cmd:DiscAn_Case/cmd:Language/cmd:LanguageName/text()</xpath>
     </field>
-    <field name="Origin">
-      <xpath>//cmd:CMD/cmd:Header/cmd:MdCollectionDisplayName/text()</xpath>
+    <field name="SpatialCoverage">
+    </field>
+    <field name="TemporalCoverage">
     </field>
     <field name="Format">
       <xpath>string-join(distinct-values(//cmd:CMD/cmd:Resources/cmd:ResourceProxyList/cmd:ResourceProxy/cmd:ResourceType/@mimetype),';')</xpath>
