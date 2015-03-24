@@ -37,6 +37,7 @@
     </field>
     <!-- Access data  -->
     <field name="identifiers">
+      <xpath>//cmd:CMD/cmd:Resources/cmd:ResourceProxyList/cmd:ResourceProxy[cmd:ResourceType = 'LandingPage']/cmd:ResourceRef/text()</xpath>
       <xpath>//cmd:CMD/cmd:Header/cmd:MdSelfLink/text()</xpath>
 <!--
       <xpath>if (contains(//cmd:CMD/cmd:Header/cmd:MdSelfLink/text(), 'http://') or contains(//cmd:CMD/cmd:Header/cmd:MdSelfLink/text(), 'https://')) then //cmd:CMD/cmd:Header/cmd:MdSelfLink/text() else ''</xpath>
