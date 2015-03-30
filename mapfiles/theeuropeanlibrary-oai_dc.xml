@@ -31,6 +31,7 @@
    <!-- Provenance data -->
     <field name="Discipline">
       <xpath>//dc:subject/text()</xpath>
+      <string>None</string>
     </field>
     <field name="author">
       <xpath>string-join(distinct-values(//dc:creator/text()), '; ')</xpath>
