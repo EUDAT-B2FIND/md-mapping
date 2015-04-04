@@ -2,11 +2,10 @@
 <mapping-table>
   <!-- Mappings for DDI metadata version 1.2.2.?? from CESSDA - adapted to B2FIND -->
   <namespaces>
-<!-- ??? works not with DDI namespace ???
+  <!-- ??? works not with DDI namespace ???
     <namespace ns="d" uri="http://www.icpsr.umich.edu/DDI"/>
--->
-
-<!--
+   -->
+   <!--
     <field name="MetadataSchema">
         <string>http://www.icpsr.umich.edu/DDI/Version1-2-2.xsd</string>
     </field>
@@ -19,7 +18,6 @@
    <field name="title">
       <xpath>//d:codeBook/d:stdyDscr/d:citation/d:titlStmt/d:titl/text()</xpath>
       <xpath>//d:codeBook/d:docDscr/d:citation/d:titlStmt/d:titl/text()</xpath>
-      <string>(untitled)</string>
    </field>
    <field name="notes">
        <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:abstract/text()</xpath>
@@ -35,28 +33,20 @@
    <field name="Checksum">
    </field>
    <field name="Rights">
-       <xpath>/d:codeBook/d:stdyInfo/d:citation/d:prodStmt/d:copyright/text()</xpath>
-       <xpath>/d:codeBook/d:stdyDscr/d:citation/d:prodStmt/d:copyright/text()</xpath>
-       <xpath>/d:codeBook/d:stdyDscr/d:dataAccs/d:setAvail/d:avlStatus/text()</xpath>
+       <xpath>string-join(//d:codeBook/d:stdyInfo/d:citation/d:prodStmt/d:copyright/text() | //d:codeBook/d:stdyDscr/d:citation/d:prodStmt/d:copyright/text() | //d:codeBook/d:stdyDscr/d:dataAccs/d:setAvail/d:avlStatus/text(), '; ')</xpath>
    </field>
    <!-- Provenance data -->
    <field name="Discipline">
-        <!-- map all to 'Social sciences' ?? -->
-        <string>Social sciences</string>
+        <!-- map all to 'Social Sciences' ?? -->
+        <string>Social Sciences</string>
         <!--
         <xpath>//d:codeBook/d:stdyInfo/d:subject/d:topClass/text()</xpath>
         -->
    </field>
-   <field name="author">
    <!-- Concatenate attribute value of att "affiliation" to value of "Authoring Entity/Primary Investigator" element if applicable. -->
+   <field name="author">
       <xpath>//d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:AuthEnty/text()</xpath>
-<!--
-      <xpath>if (//d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:AuthEnty/@affiliation) then (
- concat(//d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:AuthEnty/text(),
- '(',//d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:AuthEnty/@affiliation,')') ) else
- (//d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:AuthEnty/text())</xpath>
-      <xpath>/d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:othId/text()</xpath>
--->
+      <xpath>//d:codeBook/d:stdyDscr/d:citation/d:distStmt/d:contact/text()</xpath>
    </field>
     <field name="Publisher">
        <xpath>//d:codeBook/d:docDscr/d:citation/d:prodStmt/d:producer/@affiliation</xpath>
@@ -76,25 +66,11 @@
        <xpath>/d:codeBook/@xml-lang</xpath>
    </field>
    <field name="SpatialCoverage">
-        <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:geogCover/d:txt/text()</xpath>
+        <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:geogUnit/text()</xpath>
    </field>
    <field name="TemporalCoverage">
        <xpath>string-join(//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:timePrd[@event="start"]/@date | //d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:timePrd[@event="end"]/@date, ';')</xpath>
     </field>
-<!--
-   <field name="TemporalCoverage:BeginDate">
-       <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:timePrd[@event="start"]/@date</xpath>
-    </field>
-    <field name="TemporalCoverage:EndDate">
-       <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:timePrd[@event="end"]/@date</xpath>
-    </field>
-    <field name="TempCoverageBegin">
-       <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:timePrd[@event="start"]/@date</xpath>
-    </field>
-    <field name="TempCoverageEnd">
-       <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:timePrd[@event="end"]/@date</xpath>
-    </field>
--->
    <field name="Format">
         <xpath>//d:codeBook/d:fileDscr/d:fileType/text()</xpath>
    </field>
@@ -111,9 +87,10 @@
     <field name="MapperVersion">
       <string expand="true">${mapper_version}</string>
     </field>
-    <!-- CESSDA specific fields -->
+    <!-- CESSDA specific fields
     <field name="ResourceType">
        <xpath>//d:codeBook/d:stdyDscr/d:stdyInfo/d:sumDscr/d:dataKind/text()</xpath>
     </field>
+    -->
   </mappings>
 </mapping-table>
