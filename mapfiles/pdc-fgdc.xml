@@ -47,7 +47,7 @@
    <field name="Language">
    </field>
    <field name="SpatialCoverage">
-        <xpath>string-join(distinct-values(//r:bounding),";")</xpath>
+        <xpath>concat(//r:bounding/r:southbc/text() , ';' , //r:bounding/r:westbc/text() , ';' ,  //r:bounding/r:northbc/text() , ';' , //r:bounding/r:eastbc/text())</xpath>
    </field>
    <field name="TemporalCoverage">
        <xpath>string-join(//r:begdate | //r:enddate, ';')</xpath>
