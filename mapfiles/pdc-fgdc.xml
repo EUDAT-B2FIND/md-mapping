@@ -20,7 +20,7 @@
        <xpath>string-join(distinct-values(//r:themekey),";")</xpath>
    </field>
    <!-- Access data  -->
-   <field name="identifiers">
+   <field name="url">
        <xpath>string-join(//r:onlink/text(), '; ')  </xpath>
     </field>
    <field name="Checksum">
