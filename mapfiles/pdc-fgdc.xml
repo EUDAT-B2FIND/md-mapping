@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <mapping-table>
-  <!-- Mappings for FGDC ??? metadata from PDC -->
+  <!-- Mappings for FGDC metadata from PDC -->
   <namespaces>
   <!-- ??? there is no namespaces for PDC ???
     <namespace ns="d" uri="http://www.???"/>
@@ -30,8 +30,7 @@
    </field>
    <!-- Provenance data -->
    <field name="Discipline">
-        <!-- map all to 'Social Sciences' ?? -->
-        <string>Earth Sciences</string>
+        <string>Environmental Science</string>
    </field>
    <field name="author">
       <xpath>string-join(distinct-values(//r:origin),";")</xpath>
