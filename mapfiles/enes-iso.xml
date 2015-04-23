@@ -24,13 +24,15 @@
       <xpath>replace(string-join(distinct-values(//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords[gmd:type/gmd:MD_KeywordTypeCode/@codeListValue = 'theme']/gmd:keyword/gco:CharacterString/text()), ';'),"/","-")</xpath>
     </field>
     <!-- Access data  -->
-    <field name="identifiers">
+    <field name="url">
       <xpath>string-join(distinct-values(//gmi:MI_Metadata/gmd:dataSetURI/gco:CharacterString/text()), '; ')</xpath>
    </field>
+   <!--
     <field name="url">
       <xpath>if (contains(//gmi:MI_Metadata/gmd:dataSetURI/gco:CharacterString/text(), '[doi:')) then concat('http://dx.doi.org/',substring-before(substring-after(//gmi:MI_Metadata/gmd:dataSetURI/gco:CharacterString/text(), '[doi: '), ']')) else //gmi:MI_Metadata/gmd:dataSetURI/gco:CharacterString/text()</xpath>
       <xpath>if (contains(//gmd:MD_Metadata/gmd:dataSetURI/gco:CharacterString/text(), '[doi:')) then concat('http://dx.doi.org/',substring-before(substring-after(//gmd:MD_Metadata/gmd:dataSetURI/gco:CharacterString/text(), '[doi: '), ']')) else //gmd:MD_Metadata/gmd:dataSetURI/gco:CharacterString/text()</xpath>
     </field>
+    -->
    <field name="Checksum">
    </field>
    <field name="Rights">

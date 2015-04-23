@@ -36,7 +36,7 @@
       <xpath>//cmd:CMD/cmd:Components/cmd:Song/cmd:Keywords/cmd:Keyword/text()</xpath>
     </field>
     <!-- Access data  -->
-    <field name="identifiers">
+    <field name="url">
       <xpath>//cmd:CMD/cmd:Resources/cmd:ResourceProxyList/cmd:ResourceProxy[cmd:ResourceType = 'LandingPage']/cmd:ResourceRef/text()</xpath>
       <xpath>//cmd:CMD/cmd:Header/cmd:MdSelfLink/text()</xpath>
 <!--

@@ -23,7 +23,7 @@
       <xpath>replace(string-join(distinct-values(//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords[gmd:type/gmd:MD_KeywordTypeCode/@codeListValue = 'theme']/gmd:keyword/gco:CharacterString/text()), ';'),"/","-")</xpath>
     </field>
     <!-- Access data  -->
-    <field name="identifiers">
+    <field name="url">
       <xpath>string-join(distinct-values(//gmi:MI_Metadata/gmd:dataSetURI/gco:CharacterString/text()), '; ')</xpath>
    </field>
    <field name="Checksum">

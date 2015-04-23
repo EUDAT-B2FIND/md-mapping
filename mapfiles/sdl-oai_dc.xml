@@ -17,11 +17,11 @@
       <xpath>replace(replace(//dc:type[1]/text(),"info:",""),"[()/]"," ")</xpath>
     </field>
     <!-- Access data  -->
-    <field name="identifiers">
+    <field name="url">
       <xpath>string-join(distinct-values(//dc:identifier/text()),';')</xpath>
-   </field>
-   <field name="Checksum">
-   </field>
+    </field>
+    <field name="Checksum">
+    </field>
     <field name="Rights">
       <xpath>//dc:rights/text()</xpath>
     </field>

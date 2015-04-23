@@ -27,7 +27,7 @@
        <xpath>string-join(//d:codeBook/d:stdyDscr/d:stdyInfo/d:subject/d:keyword/text() | //d:codeBook//d:stdyDscr//d:stdyInfo//d:subject//d:topcClas/text() ,";")</xpath>
    </field>
    <!-- Access data  -->
-   <field name="identifiers">
+   <field name="url">
        <xpath>string-join(//d:codeBook/d:stdyDscr/d:dataAccs/d:setAvail/d:accsPlac/@URI | //d:codeBook/d:stdyDscr/d:citation/d:titlStmt/d:IDNo/text() | /d:codeBook/d:stdyDscr/d:citation/d:rspStmt/d:othId[@type="DOI"]/text(), '; ')  </xpath>
     </field>
    <field name="Checksum">
