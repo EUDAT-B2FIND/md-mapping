@@ -39,7 +39,6 @@
       <xpath>//gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString/text()</xpath>
     </field>
     <field name="PublicationYear">
-      <xpath>//gmi:MI_Metadata/gmd:dateStamp/gco:DateTime/text()</xpath>
       <xpath>//gmd:MD_Metadata/gmd:dateStamp/gco:DateTime/text()</xpath>
     </field>
     <!-- Formal data -->
@@ -59,7 +58,7 @@
       <xpath>concat(//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/text(),';',//gmd:temporalElement[1]/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition/text())</xpath>
     </field>
     <field name="Format">
-      <xpath>string-join(distinct-values(//gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributrionFormat/gmd:MD_Format/gmd:name/gco:CharacterString/text()), '; ')</xpath>
+      <xpath>string-join(distinct-values(//gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:name/gco:CharacterString/text()), '; ')</xpath>
     </field>
     <field name="Contact">
       <xpath>string-join(distinct-values(//gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty[gmd:role/gmd:CI_RoleCode/@codeListValue = 'pointOfContact']/gmd:organisationName/gco:CharacterString[not(text()='not filled')]/text() ), '; ')</xpath>
