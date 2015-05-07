@@ -34,7 +34,7 @@
       <string>None</string>
     </field>
     <field name="author">
-      <xpath>string-join(distinct-values(//dc:creator/text()), '; ')</xpath>
+      <xpath>string-join(distinct-values(//dc:creator/text() | //dc:contributor/text() ), '; ')</xpath>
 <!-- ???
       <xpath>string-join(distinct-values(//dc:creator/text(),//dc:contributor/text()), '; ')</xpath>
 -->
